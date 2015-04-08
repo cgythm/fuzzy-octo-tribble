@@ -1,0 +1,13 @@
+@mixin font-size($size: base){
+    @if $size == base {
+
+    }@else if $size == small {
+
+    }@else if $size == xsmal {
+
+    }@else if $size == large {
+
+    }@else if $size == larger {
+
+    }
+}

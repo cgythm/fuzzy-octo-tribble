@@ -1,0 +1,16 @@
+@import "_style.scss";
+
+html{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    &.wf-oxygen-n4-active.wf-oxygen-n7-active{
+        font-family: 'Oxygen', sans-serif;
+    }
+    body{
+        $bg-color: lighten(black, 12%);
+        $medium-gray: lighten(black, 50%);
+        $fg-color: desaturate(lighten(invert($bg-color), 10%), 90%);
+        background-color: $bg-color;
+        color: transparentize(mix($fg-color, $medium-gray, 100%-10%), 0.1);
+        font-size: 16pt;
+    }
+}
