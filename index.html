@@ -5,12 +5,13 @@
     <title>JUNK STUFF</title>
     <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="/shared/underscore-min.js"></script>
+    <script type="text/javascript" src="stuff.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheets/home.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <script type="text/javascript">
         WebFontConfig = {
-            google: { families: [ 'Oxygen:400,700:latin' ] }
+            google: { families: [ 'Oxygen:400,700:latin', 'Mandali::latin', 'Khula::latin' ] }
         };
         (function () {
             var wf = document.createElement('script');
@@ -26,24 +27,20 @@
 </head>
 <body>
 <div class="container">
-    <header>
-        <h2>Just Junk</h2>
-    </header>
-    <article>
-        <ul>
-            <li>A Cool Website</li>
-            <li>A Better Website</li>
-            <li>Tomorrow is so Cool</li>
-            <li>Whatever Happened to Tomorrow?</li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
-    </article>
+    <div class="inner">
+        <header>
+            <h2>Just Junk</h2>
+        </header>
+        <article>
+            <ul>
+                <li>A Cool Website</li>
+                <li>A Better Website</li>
+                <li>Tomorrow is so Cool</li>
+                <li>Whatever Happened to Tomorrow?</li>
+                <li class="more">More</li>
+            </ul>
+        </article>
+    </div>
 </div>
 </body>
 </html>

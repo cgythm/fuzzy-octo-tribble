@@ -1,9 +1,13 @@
 @import "_style.scss";
 
 html{
+    width: 100%;
+    height: 100%;
+
+    font-size: 16pt;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     &.wf-oxygen-n4-active.wf-oxygen-n7-active{
-        font-family: 'Oxygen', sans-serif;
+        @extend %font-oxygen;
     }
     body{
         $bg-color: lighten(black, 12%);
@@ -11,10 +15,38 @@ html{
         $fg-color: desaturate(lighten(invert($bg-color), 10%), 90%);
         background-color: $bg-color;
         color: transparentize(mix($fg-color, $medium-gray, 100%-10%), 0.1);
-        font-size: 16pt;
     }
 }
 
 *{
     box-sizing: border-box;
+}
+
+%font-kulha{
+    font-family: 'Khula', sans-serif;
+}
+
+%font-oxygen{
+    font-family: 'Oxygen', sans-serif;
+}
+
+%font-mandali{
+    font-family: 'Mandali', sans-serif;
+}
+
+@media screen and (max-device-width: 600px){
+    body{
+        margin: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    div.container{
+        width: 100%;
+        height: 100%;
+        padding: 1em;
+        > div.inner{
+
+        }
+    }
 }
