@@ -3,7 +3,6 @@
 Besides what it does, which is just simply change the background color, this little bit of code was my attempt at
 working with continuation style passing.
 
-'''
 
     function start() {
         var $change = $("article#cont"), cnt = null, rollcount = 0;
@@ -20,5 +19,3 @@ working with continuation style passing.
 
         })));
     }
-    
-'''
