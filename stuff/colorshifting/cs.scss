@@ -1,10 +1,36 @@
+$dur: 1s;
 html{
     body{
         -webkit-transition: background-color;
-        -webkit-transition-duration: 1s;
+        -webkit-transition-duration: $dur;
 
         transition: background-color;
-        transition-duration: 1s;
+        transition-duration: $dur;
+
+        width: 100%;
+        height: 100%;
+
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 0;
+
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: transparentize(white, 0.5);
+    }
+}
+
+
+body{
+    $step: 30;
+    $hue-step: 360deg / $step;
+    $sat: 100%;
+    $light: 50%;
+    $hs:0;
+    @for $i from 1 to ($step + 1){
+        &.a-#{$i}{
+            background-color: hsl($hue-step * $i, $sat, $light)
+        }
     }
 }
 

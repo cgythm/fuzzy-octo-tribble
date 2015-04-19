@@ -122,11 +122,27 @@
     }
 
     function start() {
-        var $change = $("article#cont"), cnt = null, rollcount = 0;
+        var $change = $("article#cont"), cnt = null, rollcount = 0, $bg = $('body'), previouscolor = null;
 
+        function makelist(prefix, start, end){
+            var len = end - start, l = [], i;
 
-        setTimeout(next([1, 2, 3, 4], pauser(function (unpause, v, self) {
+            for(i = 0; i <= len; i++){
+                l.push(prefix+(start+i));
+            }
+
+            return l;
+        }
+        window.colors = makelist('a-', 1, 30);
+
+        setTimeout(next(colors, pauser(function (unpause, v, self) {
             rollcount += 1;
+            $bg.addClass(v)
+            if(previouscolor){
+                $bg.removeClass(previouscolor);
+            }
+            previouscolor = v;
+
             $change.text(v + ", with roll = " + rollcount);
 
             /*if(cnt == null){
@@ -138,7 +154,7 @@
              pause(cnt);*/
             console.log("ok " + rollcount + " with " + v);
             unpause(function () {
-                setTimeout(self, 2000);
+                setTimeout(self, 1000);
             });
 
         })));
