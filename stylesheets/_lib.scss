@@ -1,0 +1,81 @@
+@function mqmax($v) {
+    @return unquote("(max-device-width:#{$v})");
+}
+
+@function mqmin($v) {
+    @return unquote("(min-device-width:#{$v})");
+}
+
+@function mediaquery($min, $max, $type: screen) {
+    $res: "";
+
+//interpolation on directives dont work :(
+    @if $min != null and $max != null{
+        $res: "@media #{$type} and #{mqmin($min)} and #{mqmax($max)}";
+    }@else if $min != null and $max == null{
+        $res: "@media #{$type} and #{mqmin($min)}";
+    }@else if $min == null and $max != null{
+        $res: "@media #{$type} and #{mqmax($max)}";
+    }
+
+    @return $res;
+}
+
+
+@function mediaquery_param($min, $max, $type: screen) {
+    $res: "";
+
+    @if $min != null and $max != null{
+        $res: "#{$type} and #{mqmin($min)} and #{mqmax($max)}";
+    }@else if $min != null and $max == null{
+        $res: "#{$type} and #{mqmin($min)}";
+    }@else if $min == null and $max != null{
+        $res: "#{$type} and #{mqmax($max)}";
+    }
+
+    @return unquote($res);
+}
+
+@function map-get-ok($map, $key, $defval: null){
+
+    @if map-has-key($map, $key){
+        @debug $key;
+        @return map-get($map, $key);
+    }
+    @return $defval;
+}
+
+@function make-breakpoint($min:null, $max:null){
+    $amax: if($min != null and $max != null, max($min, $max), if($max != null, $max, null));
+    $amin:  if($min != null and $max != null, min($min, $max), if($min != null, $min, null));
+    @return (min: $amin, max: $amax, type: screen);
+}
+
+@mixin mqscreen($min, $max, $type: screen){
+    $b: mediaquery_param($min, $max, $type);
+    $mq: $b; //assign it to $mb
+    @if $mq == ""{
+        @content;
+    }@else{
+        @media #{$mq}{
+            @content;
+        }
+    }
+}
+
+@mixin for-breakpoint($ctype){
+    $min: map-get-ok($ctype, "min");
+    $max: map-get-ok($ctype, "max");
+    $type: map-get-ok($ctype, "type", screen);
+
+    @include mqscreen($min, $max, $type){
+        @content;
+    }
+}
+
+//alias
+@mixin breakpoint($ctype){
+    @include for-breakpoint($ctype){
+        @contnt;
+    }
+}

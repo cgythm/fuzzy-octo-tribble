@@ -1,15 +1,16 @@
 @import "_style.scss";
+@import "_lib.scss";
 
-html{
+html {
     width: 100%;
     height: 100%;
 
     font-size: 16pt;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    &.wf-oxygen-n4-active.wf-oxygen-n7-active{
+    &.wf-oxygen-n4-active.wf-oxygen-n7-active {
         @extend %font-oxygen;
     }
-    body{
+    body {
         $bg-color: lighten(black, 12%);
         $medium-gray: lighten(black, 50%);
         $fg-color: desaturate(lighten(invert($bg-color), 10%), 90%);
@@ -18,35 +19,68 @@ html{
     }
 }
 
-*{
+* {
     box-sizing: border-box;
 }
 
-%font-kulha{
+%font-kulha {
     font-family: 'Khula', sans-serif;
 }
 
-%font-oxygen{
+%font-oxygen {
     font-family: 'Oxygen', sans-serif;
 }
 
-%font-mandali{
+%font-mandali {
     font-family: 'Mandali', sans-serif;
 }
 
-@media screen and (max-device-width: 600px){
-    body{
+@media screen and (max-device-width: 600px) {
+    body {
         margin: 0;
         height: 100%;
         width: 100%;
     }
 
-    div.container{
+    div.container {
         width: 100%;
         height: 100%;
         padding: 1em;
-        > div.inner{
+        > div.inner {
 
         }
+    }
+}
+
+$iphone: make-breakpoint($min: 200px);
+
+@include for-breakpoint($iphone) {
+    .sex {
+        -mode: dirty;
+    }
+}
+
+ul.navlist {
+    @extend %navlist;
+}
+
+
+%navlist{
+    list-style-type: none;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+    li {
+        display: inline;
+        list-style-type: none;
+    }
+}
+
+%contentlist{
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    li{
+        width: 100%;
     }
 }

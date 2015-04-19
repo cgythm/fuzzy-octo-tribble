@@ -1,7 +1,23 @@
-[
-    {
-        "name": "placeholder",
-        "dir": "/stuff/placeholder",
-        "title": "what a cool thing"
-    }
-]
+{
+    "github_root": "",
+    "projects": [
+        {
+            "name": "placeholder",
+            "dir": "/stuff/placeholder",
+            "title": "just a placeholder"
+        },
+
+        {
+            "name": "background",
+            "dir": "/stuff/colorshifting/",
+            "title": "Sporadic Color shifting"
+        },
+
+        {
+            "name": "tumblr-gifs",
+            "dir":"/stuff/tumblr-gifs/",
+            "title": "Gifs from tumblr without the tumblr"
+        }
+
+    ]
+}
