@@ -4,6 +4,7 @@ Besides what it does, which is just simply change the background color, this lit
 working with continuation style passing.
 
 '''
+
     function start() {
         var $change = $("article#cont"), cnt = null, rollcount = 0;
 
@@ -19,4 +20,5 @@ working with continuation style passing.
 
         })));
     }
+    
 '''
