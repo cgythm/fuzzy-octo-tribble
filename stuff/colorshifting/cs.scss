@@ -1,4 +1,4 @@
-$dur: 1s;
+$dur: 3s;
 html{
     body{
         -webkit-transition: background-color;
@@ -17,8 +17,26 @@ html{
 
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         color: transparentize(white, 0.5);
+
+        font-size: 32pt;
     }
 }
+
+article#container{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+article#insider{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    transform: translate(0%, -50%);
+    top: 50%;
+}
+
+
 
 
 body{

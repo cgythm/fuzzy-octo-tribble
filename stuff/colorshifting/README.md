@@ -1,6 +1,6 @@
 ### Sporadic Color Shifting
 
-Besides what it does, which is just simply change the background color, this little bit of code was my attempt at
+Besides simple the background color changes, this little bit of code was my attempt in
 working with continuation style passing.
 
     function start() {

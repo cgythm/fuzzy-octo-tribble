@@ -122,7 +122,7 @@
     }
 
     function start() {
-        var $change = $("article#cont"), cnt = null, rollcount = 0, $bg = $('body'), previouscolor = null;
+        var $console = $("span#console"), $toggle = $("a#toggle"), cnt = null, rollcount = 0, $bg = $('body'), previouscolor = null;
 
         function makelist(prefix, start, end){
             var len = end - start, l = [], i;
@@ -143,7 +143,7 @@
             }
             previouscolor = v;
 
-            $change.text(v + ", with roll = " + rollcount);
+            $console.text(v + ", with roll = " + rollcount);
 
             /*if(cnt == null){
              cnt = function(){
@@ -152,7 +152,6 @@
              }
 
              pause(cnt);*/
-            console.log("ok " + rollcount + " with " + v);
             unpause(function () {
                 setTimeout(self, 1000);
             });
