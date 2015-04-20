@@ -7,7 +7,7 @@
         if (typeof document.hidden !== "undefined") {
             hname = "hidden";
             vcname = "visibilitychange";
-        }else if (typeof document.mozHidden !== "undefined") {
+        } else if (typeof document.mozHidden !== "undefined") {
             hname = "mozHidden";
             vcname = "mozvisibilitychange";
         } else if (typeof document.msHidden !== "undefined") {
@@ -22,10 +22,13 @@
         }
 
         if (hname == null) {
-            hidden = function () {return false;}
-            vc = function (cb) {};
+            hidden = function () {
+                return false;
+            }
+            vc = function (cb) {
+            };
         } else {
-            hidden = function(){
+            hidden = function () {
                 return document[hname];
             };
 
@@ -71,6 +74,7 @@
         return nn;
     }
 
+
     function pauser(cb) {
         var fk, unpause, paused = null, continued;
 
@@ -98,15 +102,16 @@
             } else {
                 //if we are paused, do not invoke the function, rather
                 //let its invocation happen when we get unpaused.
-                paused = cbd;
+                continued = cbd;
+                console.log("we take a pause");
             }
         };
 
 
         pageVisibilityAPI.visibilityChange(function (s, e) {
-            if (!s && paused != null) {
-                paused();
-                paused = null;
+            if (!s && continued != null) {
+                continued();
+                continued = null;
             }
         });
 
@@ -121,24 +126,56 @@
 
     }
 
+    function button($elm, s1, s2, bounce) {
+        var fn, state = false, last = Date.now(), now;
+
+        bounce = (bounce == void 0) ? 250 : bounce;
+
+        s1.call($elm, $elm, state);
+        state = !state;
+        fn = function (e) {
+            now = Date.now();
+            if ((last + bounce) <= now) {
+                if (state) {
+                    s2.call($elm, $elm, state);
+                } else {
+                    s1.call($elm, $elm, state);
+                }
+                state = !state;
+                last = now;
+            }
+            e.stopPropagation();
+            e.preventDefault();
+        };
+
+        $elm.click(fn);
+    }
+
     function start() {
         var $console = $("span#console"), $toggle = $("a#toggle"), cnt = null, rollcount = 0, $bg = $('body'), previouscolor = null;
 
-        function makelist(prefix, start, end){
+        button($toggle, function ($e, s) {
+            $e.text("pause");
+        }, function ($e, s) {
+            $e.text("resume");
+        });
+
+        function makelist(prefix, start, end) {
             var len = end - start, l = [], i;
 
-            for(i = 0; i <= len; i++){
-                l.push(prefix+(start+i));
+            for (i = 0; i <= len; i++) {
+                l.push(prefix + (start + i));
             }
 
             return l;
         }
+
         window.colors = makelist('a-', 1, 30);
 
         setTimeout(next(colors, pauser(function (unpause, v, self) {
             rollcount += 1;
             $bg.addClass(v)
-            if(previouscolor){
+            if (previouscolor) {
                 $bg.removeClass(previouscolor);
             }
             previouscolor = v;
