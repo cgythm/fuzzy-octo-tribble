@@ -25,15 +25,17 @@
             "title": "History state exploration"
         },
 
+
         {
             "name": "solitaire-mancala",
-            "dir":"/stuff/solitaire-mancala/",
+            "dir":"/stuff/solitaire_mancala/",
             "title": "GAME: Solitaire Mancala"
         },
 
+
         {
             "name": "solitaire-mancala-modal",
-            "dir":"/stuff/solitaire-mancala/mock_modal.html",
+            "dir":"/stuff/solitaire_mancala/mock_modal.html",
             "title": "GAME: Solitaire Mancala"
         }
 
