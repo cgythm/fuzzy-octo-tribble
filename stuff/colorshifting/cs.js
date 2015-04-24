@@ -126,6 +126,45 @@
 
     }
 
+    var pauseState = function (s){
+        var state, hidden, change, listen, set, eq = [];
+        state = s == void 0?false:(typeof s === 'boolean'?s:false);
+
+        set = function(s){
+            if(s !== state){
+                state = s;
+                change()
+                return state;
+            }
+        };
+
+        hidden = function(){
+            return state;
+        };
+
+        listen = function(cb){
+            eq.push(cb);
+        };
+
+        change = function(){
+            var i, l = eq.length, b;
+            for(i = 0; i < l; i++){
+                b = eq[i];
+                if(b instanceof Function){
+                    b.call(b, state);
+                }
+            }
+        }
+
+        return {
+            set: set,
+            isHidden: hidden,
+            onChange: listen
+        };
+    }
+
+    window.ps = pauseState;
+
     function button($elm, s1, s2, bounce) {
         var fn, state = false, last = Date.now(), now;
 
@@ -155,9 +194,9 @@
         var $console = $("span#console"), $toggle = $("a#toggle"), cnt = null, rollcount = 0, $bg = $('body'), previouscolor = null;
 
         button($toggle, function ($e, s) {
-            $e.text("pause");
+            $e.text("stop");
         }, function ($e, s) {
-            $e.text("resume");
+            $e.text("start");
         });
 
         function makelist(prefix, start, end) {

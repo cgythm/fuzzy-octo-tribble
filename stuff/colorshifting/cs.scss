@@ -41,24 +41,25 @@ span#toggle{
 }
 
 a{
-    color: transparentize(white, 0.5);
-    text-decoration: none;
+
     &:hover{
-        color: transparentize(white, 0.5);
-        text-decoration: underline;
+        @extend %simple-a-underlined;
     }
 
-    &:visited{
-        color: transparentize(white, 0.5);
-        text-decoration: none;
-    }
-
-    &:active{
-        color: transparentize(white, 0.5);
-        text-decoration: underline;
+    &, &:visited, &:active{
+        @extend %simple-a;
     }
 }
 
+%simple-a{
+    color: transparentize(white, 0.5);
+    text-decoration: none;
+}
+
+%simple-a-underlined{
+    color: transparentize(white, 0.5);
+    text-decoration: underline;
+}
 
 
 body{

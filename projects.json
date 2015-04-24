@@ -17,7 +17,26 @@
             "name": "tumblr-gifs",
             "dir":"/stuff/tumblr-gifs/",
             "title": "Gifs from tumblr without the tumblr"
+        },
+
+        {
+            "name": "history-stuff",
+            "dir":"/stuff/history-state/",
+            "title": "History state exploration"
+        },
+
+        {
+            "name": "solitaire-mancala",
+            "dir":"/stuff/solitaire-mancala/",
+            "title": "GAME: Solitaire Mancala"
+        },
+
+        {
+            "name": "solitaire-mancala-modal",
+            "dir":"/stuff/solitaire-mancala/mock_modal.html",
+            "title": "GAME: Solitaire Mancala"
         }
+
 
     ]
 }

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>modal and UI for the game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="modal.css"/>
+    <script type="text/javascript">
+        (function () {
+            $(document).ready(function () {
+                var $modalbg = $('div.modal'), $about_btn = $('#abt-btn'), $settings_btn = $("#settings-btn"),
+                        $modal_settings = $('section.settings'), $modal_about = $('section.about');
+
+                $settings_btn.click(function (e) {
+                    $modalbg.addClass('active');
+                    $modal_settings.addClass('active');
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+
+
+                $about_btn.click(function (e) {
+                    $modalbg.addClass('active');
+                    $modal_about.addClass('active');
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('cock');
+                });
+
+                $modalbg.click(function (e) {
+                    $modalbg.removeClass('active');
+                    if ($modal_settings.hasClass('active')) {
+                        $modal_settings.removeClass('active');
+                    } else {
+                        $modal_about.removeClass('active');
+                    }
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+
+                /*$("#abt-btn").click(function(e){
+                 var k = $("nav.top");
+                 if(k.hasClass('abs')){
+                 k.removeClass('abs');
+                 }else{
+                 k.addClass('abs');
+                 }
+                 e.preventDefault();
+                 e.stopPropagation();
+                 });*/
+
+                $(".modal-pane > div").click(function (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                })
+
+
+            });
+        }).call(this);
+    </script>
+</head>
+<body>
+<div class="all">
+    <!--
+    elements in play:
+
+    buttons for gameboard control
+-->
+    <nav class="top">
+        <ul>
+            <li><a href="#about" id="abt-btn"><span class="icon-q"><span>about</span></span></a></li>
+            <li><a href="#settings" id="settings-btn"><span class="icon-gears"><span>settings</span></span></a></li>
+        </ul>
+    </nav>
+    <div class="modal">
+        <div class="tcent">
+            <div>
+                <section class="settings modal modal-pane">
+                    <div>baba</div>
+                </section>
+                <section class="about modal modal-pane">
+                    <div>
+                        <div class="modal-split">
+                            <div class="content">
+                                <ul class="tabs">
+                                    <li><a href="#about">about</a></li>
+                                    <li><a href="#howtoplay">how to play</a></li>
+                                </ul>
+
+                            </div>
+                            <div class="done"><a href="#" class="done" data-target="about modal">okay, done!</a></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <article class="container">
+        <div class="inner">
+            <div class="top"><h2 id="test">Solitaire Mancala</h2></div>
+            <div class="gameboard"></div>
+        </div>
+    </article>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Solitaire Mancala</title>
+    <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="sm.css"/>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#about" id="ctrl-about" data-target="section#about">about</a> <!-- info icon--></li>
+            <!--<li><a href="#howtoplay" id="ctrl-howtoplay">how to play</a><!--question m</li>-->
+            <li><a href="#settings" id="ctrl-settings">settings</a></li>
+        </ul>
+    </nav>
+    <article class="container">
+
+        <!--the modal block -->
+        <div class="modal">
+            <section id="about">
+                <div>
+                    <ul class="tabs">
+                        <li><a href="#about">about</a></li>
+                        <li><a src="#howotoplay" href="#howtoplay">how to play</a></li>
+                    </ul>
+                </div>
+
+            </section>
+            <secton id="settings">
+                <h3>settings</h3>
+                <div>
+                    <div>board size: </div>
+                    <div>free suggestions:</div>
+                    <div>
+                        <a href="#">apply and reset the game</a>
+                    </div>
+                </div>
+            </secton>
+        </div>
+
+        <div class="inner">
+            <div class="game">
+                <div class="board">
+                    <div class="playarea"></div>
+                    <div class="controls">
+                        <ul>
+                            <li><a href="#newboard">new board</a></li>
+                            <li><a href="#resetboard">reset board</a></li>
+                            <li><a href="">suggest a move</a><span>number of moves</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</body>
+</html>
