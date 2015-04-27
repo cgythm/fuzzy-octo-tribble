@@ -1,7 +1,9 @@
 ### Sporadic Color Shifting
 
-Besides simple the background color changes, this little bit of code was my attempt
-working with continuation style passing.
+Besides simple technique of using css transistions to change the background color,
+I tried to add some functional flair to it.
+
+This little bit of code was my attempt working with continuation style passing.
 
         setTimeout(next(colors, pauser(function (unpause, v, self) {
             rollcount += 1;

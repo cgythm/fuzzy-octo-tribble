@@ -152,7 +152,7 @@ div.tcent {
 .modal-pane {
     //move the dimensions for the id selector and within media queries
     max-width: 35em;
-    height: calc(100vh - 150px);
+    height: calc(100vh  -  150px);
 
     box-sizing: border-box;
 
@@ -224,13 +224,32 @@ nav.top.abs {
     right: 0px;
 }
 
+div.tab{
+    display: none;
+    &.active{
+        display: block;
+    }
+}
+
 section.about{
     //@extend %modal-pane;
+    $bg-color: mix(red, $background-color);
     > div{
         //put background color here because its specific to the background
-        background-color: mix(red, $background-color);
+        background-color: $bg-color;
+        box-shadow: 4px 4px mix($bg-color, $background-color);
     }
+
+
     @include link-simple(transparentize(white, 0.1), transparentize(white, 0.5));
+
+    div.about{
+
+    }
+
+    div.howtoplay{
+
+    }
 }
 
 section.settings{
