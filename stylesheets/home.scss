@@ -55,8 +55,8 @@ html {
 $iphone: make-breakpoint($min: 200px);
 
 @include for-breakpoint($iphone) {
-    .sex {
-        -mode: dirty;
+    .burrito {
+        -mode: spicey;
     }
 }
 

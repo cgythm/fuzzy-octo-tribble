@@ -1,9 +1,11 @@
 @function mqmax($v) {
-    @return unquote("(max-device-width:#{$v})");
+    //@return unquote("(max-device-width:#{$v})");
+    @return unquote("(max-width:#{$v})");
 }
 
 @function mqmin($v) {
-    @return unquote("(min-device-width:#{$v})");
+    //@return unquote("(min-device-width:#{$v})");
+    @return unquote("(min-width:#{$v})");
 }
 
 @function mediaquery($min, $max, $type: screen) {
@@ -49,6 +51,10 @@
     $amax: if($min != null and $max != null, max($min, $max), if($max != null, $max, null));
     $amin:  if($min != null and $max != null, min($min, $max), if($min != null, $min, null));
     @return (min: $amin, max: $amax, type: screen);
+}
+
+@function range-maker(){
+    @return "";
 }
 
 @mixin mqscreen($min, $max, $type: screen){

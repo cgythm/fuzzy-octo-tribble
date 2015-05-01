@@ -1,4 +1,10 @@
 $dur: 3s;
+
+@import "../../stylesheets/_lib.scss";
+$okayish-size: make-breakpoint($min: 601px);
+$smallish-size: make-breakpoint($min: 401px, $max: 600px);
+$smallest-size: make-breakpoint($max: 400px);
+
 html{
     body{
         -webkit-transition: background-color;
@@ -18,7 +24,20 @@ html{
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
         color: transparentize(white, 0.5);
 
-        font-size: 32pt;
+        $base-font-size: 32pt;
+
+        @include for-breakpoint($smallest-size){
+            font-size: $base-font-size/2;
+        }
+
+        @include for-breakpoint($smallish-size){
+            font-size: $base-font-size*0.75;
+        }
+
+        @include for-breakpoint($okayish-size){
+            font-size: $base-font-size;
+        }
+
     }
 }
 
@@ -63,11 +82,15 @@ a{
 
 
 body{
+    //this produces the color ranges we randomy pick from.
+    //in this, the hue is divided into 30 steps (so we get to pick from 30 colors)
+    //and the saturation and lightness is kept constant.
     $step: 30;
     $hue-step: 360deg / $step;
     $sat: 100%;
     $light: 50%;
-    $hs:0;
+
+    //iterates through the steps and make the styles
     @for $i from 1 to ($step + 1){
         &.a-#{$i}{
             background-color: hsl($hue-step * $i, $sat, $light)

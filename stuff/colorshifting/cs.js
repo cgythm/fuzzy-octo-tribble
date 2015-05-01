@@ -1,5 +1,22 @@
 (function () {
 
+    /**
+     *
+     * @param prefix
+     * @param start
+     * @param end
+     * @returns {Array}
+     */
+    function makelist(prefix, start, end) {
+        var len = end - start, l = [], i;
+
+        for (i = 0; i <= len; i++) {
+            l.push(prefix + (start + i));
+        }
+
+        return l;
+    }
+
     var pageVisibilityAPI = (function () {
         var vc, vcname, hidden, hname;
 
@@ -46,6 +63,12 @@
     }).call(this);
 
 
+    /**
+     * next chooses what's next.
+     * @param list list of things to choose from
+     * @param cb the callback that gets invoked when next has chosen something
+     * @returns {Function}
+     */
     function next(list, cb) {
         var pstate, nn;
 
@@ -74,8 +97,14 @@
         return nn;
     }
 
-
-    function pauser(cb) {
+    /**
+     *
+     * @param cb
+     * @param hidden
+     * @param onChange
+     * @returns {Function}
+     */
+    function pauseable(cb, hidden, onChange) {
         var fk, unpause, paused = null, continued;
 
         function combineargs(args, rest) {
@@ -92,9 +121,11 @@
             return nb;
         }
 
+
+
         unpause = function (cbd) {
             //
-            var h = !pageVisibilityAPI.hidden();
+            var h = !hidden();
 
             if (h) {
                 //if we aren't paused, invoke the function
@@ -108,12 +139,14 @@
         };
 
 
-        pageVisibilityAPI.visibilityChange(function (s, e) {
-            if (!s && continued != null) {
-                continued();
-                continued = null;
-            }
-        });
+        if(onChange !== void 0 && onChange instanceof Function){
+            onChange(function (s, e) {
+                if (!s && continued != null) {
+                    continued();
+                    continued = null;
+                }
+            });
+        }
 
         fk = function () {
             var args;
@@ -126,8 +159,13 @@
 
     }
 
-    var pauseState = function (s){
-        var state, hidden, change, listen, set, eq = [];
+    /**
+     * pauser
+     * @param s the initial state
+     * @returns {{set: Function, isHidden: Function, onChange: Function}}
+     */
+    function pauser (s){
+        var state, whatState, change, listen, set, eq = [];
         state = s == void 0?false:(typeof s === 'boolean'?s:false);
 
         set = function(s){
@@ -138,7 +176,7 @@
             }
         };
 
-        hidden = function(){
+        whatState = function(){
             return state;
         };
 
@@ -158,14 +196,20 @@
 
         return {
             set: set,
-            isHidden: hidden,
+            isHidden: whatState,
             onChange: listen
         };
     }
 
-    window.ps = pauseState;
 
-    function button($elm, s1, s2, bounce) {
+    /**
+     * toggle widget
+     * @param $elm jQuery resolved element
+     * @param s1 callback function executed on first state
+     * @param s2 callback functon executed on second state
+     * @param bounce the time in milliseconds that limit transistion
+     */
+    function toggle($elm, s1, s2, bounce) {
         var fn, state = false, last = Date.now(), now;
 
         bounce = (bounce == void 0) ? 250 : bounce;
@@ -191,27 +235,34 @@
     }
 
     function start() {
-        var $console = $("span#console"), $toggle = $("a#toggle"), cnt = null, rollcount = 0, $bg = $('body'), previouscolor = null;
+        var $console = $("span#console"),
+            $toggle = $("a#toggle"),
+            cnt = null,
+            rollcount = 0,
+            $bg = $('body'),
+            previouscolor = null,
+            colors = makelist('a-', 1, 30), //generates our list of strings with the prefix 'a-'
+            pause_boss = pauser(); //pause_boss is what controls the pausing
 
-        button($toggle, function ($e, s) {
-            $e.text("stop");
-        }, function ($e, s) {
-            $e.text("start");
+        //pausing logic influenced by the pageVisiblity state change
+        pageVisibilityAPI.visibilityChange(function(hidden, e){
+            console.log('page visibility changed ' + hidden + ", " + (new Date()));
         });
 
-        function makelist(prefix, start, end) {
-            var len = end - start, l = [], i;
+        //the pausing logic as influenced the button is fairly simple
+        //pause if we are reporting that we will pause, and unpause
+        //when we are reporting if we wil unpause.
+        toggle($toggle, function ($e, s) {
+            $e.text("stop");
+            pause_boss.set(false);
+        }, function ($e, s) {
+            $e.text("start");
+            pause_boss.set(true);
+        });
 
-            for (i = 0; i <= len; i++) {
-                l.push(prefix + (start + i));
-            }
 
-            return l;
-        }
 
-        window.colors = makelist('a-', 1, 30);
-
-        setTimeout(next(colors, pauser(function (unpause, v, self) {
+        setTimeout(next(colors, pauseable(function (unpause, v, self) {
             rollcount += 1;
             $bg.addClass(v)
             if (previouscolor) {
@@ -221,18 +272,18 @@
 
             $console.text(v + ", with roll = " + rollcount);
 
-            /*if(cnt == null){
-             cnt = function(){
-             setTimeout(self, 1000);
-             });
-             }
 
-             pause(cnt);*/
+            //when we invoke unpause, we are asking unpause to execute
+            //bock when it isn't paused.
+            //so depending on the conditions as to whether we are in a paused state
+            //or not, unpause will execute the follwing code whenever it becomes unpaused
             unpause(function () {
+                //self is our continuation
+                //we invoke self whenever timeout calls us back.
                 setTimeout(self, 1000);
             });
 
-        })));
+        }, pause_boss.isHidden, pause_boss.onChange)));
     }
 
     $(document).ready(function () {
