@@ -117,8 +117,8 @@ body{
     //and the saturation and lightness is kept constant.
     $step: 30;
     $hue-step: 360deg / $step;
-    $sat: 100%;
-    $light: 50%;
+    $sat: 80%;
+    $light: 45%;
 
     //iterates through the steps and make the styles
     @for $i from 1 to ($step + 1){
