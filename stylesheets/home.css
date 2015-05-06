@@ -27,10 +27,25 @@ html.wf-oxygen-n4-active.wf-oxygen-n7-active {
   .burrito {
     -mode: spicey; } }
 ul.navlist {
+  position: relative;
+  font-size: 16pt;
+  height: 16pt; }
+  ul.navlist li {
+    position: absolute;
+    top: 0%;
+    display: block !important; }
+  ul.navlist li:nth-child(1) {
+    left: 0%; }
+  ul.navlist li:nth-child(2) {
+    left: 50%;
+    transform: translateX(-50%); }
+  ul.navlist li:nth-child(3) {
+    right: 0%; }
+
+ul.navlist {
   list-style-type: none;
   margin: 0;
   width: 100%;
   padding: 0; }
   ul.navlist li {
-    display: inline;
     list-style-type: none; }

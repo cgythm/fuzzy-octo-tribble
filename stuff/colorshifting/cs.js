@@ -74,7 +74,6 @@
 
         function choose() {
             var len = list.length, ran = Math.floor(Math.random() * len);
-            // console.log("rolled " + ran + " [" + list[ran] + "]");
             return list[ran];
         }
 
@@ -134,7 +133,7 @@
                 //if we are paused, do not invoke the function, rather
                 //let its invocation happen when we get unpaused.
                 continued = cbd;
-                console.log("we take a pause");
+                //console.log("we take a pause");
             }
         };
 
@@ -242,11 +241,19 @@
             $bg = $('body'),
             previouscolor = null,
             colors = makelist('a-', 1, 30), //generates our list of strings with the prefix 'a-'
-            pause_boss = pauser(); //pause_boss is what controls the pausing
+            pause_boss = pauser(),
+            button_state; //pause_boss is what controls the pausing
 
         //pausing logic influenced by the pageVisiblity state change
         pageVisibilityAPI.visibilityChange(function(hidden, e){
-            console.log('page visibility changed ' + hidden + ", " + (new Date()));
+            if(hidden){
+                //our page is hidden. so to be nice, we should pause the animation.
+                pause_boss.set(true);
+            }else{
+                if(button_state === false || button_state === null){
+                    pause_boss.set(false);
+                }
+            }
         });
 
         //the pausing logic as influenced the button is fairly simple
@@ -255,13 +262,15 @@
         toggle($toggle, function ($e, s) {
             $e.text("stop");
             pause_boss.set(false);
+            button_state = false;
         }, function ($e, s) {
             $e.text("start");
             pause_boss.set(true);
+            button_state = true;
         });
 
 
-
+        var so;
         setTimeout(next(colors, pauseable(function (unpause, v, self) {
             rollcount += 1;
             $bg.addClass(v)
@@ -270,7 +279,9 @@
             }
             previouscolor = v;
 
+            //so = v + ", with roll = " + rollcount;
             $console.text(v + ", with roll = " + rollcount);
+            //console.log(so+ " with pause state = " + (pause_boss.isHidden()?'paused':'unpaused'));
 
 
             //when we invoke unpause, we are asking unpause to execute

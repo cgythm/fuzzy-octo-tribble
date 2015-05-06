@@ -1,17 +1,24 @@
 $dur: 3s;
 
 @import "../../stylesheets/_lib.scss";
+
+//in the future, i gotta make a system to create breakpoint splitting
 $okayish-size: make-breakpoint($min: 601px);
 $smallish-size: make-breakpoint($min: 401px, $max: 600px);
 $smallest-size: make-breakpoint($max: 400px);
 
+//nesting body within html is useful when I gotta append class identifiers set by modernizr
+//to make this selector applicable
 html{
     body{
+        position: relative;
+
         -webkit-transition: background-color;
         -webkit-transition-duration: $dur;
 
         transition: background-color;
         transition-duration: $dur;
+
 
         width: 100%;
         height: 100%;
@@ -28,6 +35,7 @@ html{
 
         @include for-breakpoint($smallest-size){
             font-size: $base-font-size/2;
+
         }
 
         @include for-breakpoint($smallish-size){
@@ -79,6 +87,28 @@ a{
     color: transparentize(white, 0.5);
     text-decoration: underline;
 }
+
+
+nav{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    left: 0px;
+
+    @include for-breakpoint($smallest-size){
+
+    }
+
+    @include for-breakpoint($smallish-size){
+
+    }
+
+    @include for-breakpoint($okayish-size){
+
+    }
+
+}
+
 
 
 body{

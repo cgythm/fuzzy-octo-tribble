@@ -33,14 +33,12 @@
     }
 
     $(document).ready(function () {
+
+        var breadcrumbs = (function(){
+            //because this is executed and initiated here, we need to do this
+        }).call(this);
+
         var more = $('.more'), mk = makePerInvoke(more);
-        /*for(var i = 0; i < 10; i++){
-         mk();
-         }
-         more.click(function(e){
-         mk();
-         e.preventDefault;
-         });*/
 
         $.getJSON("/projects.json", function (data) {
             var i, projects;
