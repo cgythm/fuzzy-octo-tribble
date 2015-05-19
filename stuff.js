@@ -26,20 +26,180 @@
         return nn;
     }
 
-    function makePerInvoke($more) {
+    function makePI($more) {
         return function (data, url) {
             return makeElm($more, data, url);
         };
     }
 
     $(document).ready(function () {
+        var breadcrumbs, switch_to;
 
-        var breadcrumbs = (function(){
-            //because this is executed and initiated here, we need to do this
+        switch_to = (function () {
+            var from = null;
+            return function (to) {
+                if (from === null) {
+                    to.addClass('active')
+                } else if (from.get(0) == to.get(0)) {
+                    return;
+                }
+                else {
+                    from.removeClass('active');
+                    to.addClass('active');
+                }
+                from = to;
+            };
         }).call(this);
 
-        var more = $('.more'), mk = makePerInvoke(more);
+        breadcrumbs = (function (initcb) {
+            //because this is executed and initiated here, we need to do this
+            var state, hash, wlocation = window.location,
+                initState, lookup = {}, retobj,
+                hashChanger, old_hash;
 
+            //helper functions
+            function hashExtract(hash) {
+                if (hash.length >= 1 && hash.charAt(0) === "#") {
+                    return hash.substr(1);
+                } else {
+                    return null;
+                }
+            }
+
+            function invoke(hash) {
+                var o, cb, x;
+                if (hash.length >= 1) {
+                    //we have a valid hash, so let's just do our thing
+                    if (lookup.hasOwnProperty(hash)) {
+                        o = lookup[hash];
+                        for (x = 0; x < o.length; x++) {
+                            cb = o[x];
+                            cb();
+                        }
+                    }
+                }
+            }
+
+
+            //listen to a hash change event, plus history change event
+            if ('onhashchange' in window.document.body) {
+                retobj = {
+                    to: function (xhash) {
+                        console.log("breadcrumbs:to(" + xhash + ")");
+                        if (wlocation !== void 0) {
+                            wlocation.hash = xhash;
+                        }
+                    },
+
+                    on: function (xhash, fb) {
+                        if (!lookup.hasOwnProperty(xhash)) {
+                            lookup[xhash] = [fb];
+                        } else {
+                            lookup[xhash].push(fb);
+                        }
+                        return this;
+                    },
+
+                    force_set: function(hash){
+                        console.log("breadcrumbs:force_set("+hash+")");
+                        wlocation.hash = hash;
+                        hashChanger(hash);
+                    },
+
+                    wloc: wlocation
+
+                };
+
+                old_hash = null;
+                hashChanger = function(newHash){
+                    if(old_hash !== newHash){
+                        invoke(newHash);
+                        old_hash = newHash;
+                        return true;
+                    }
+                    console.log("hashChanger: old hash matches new, " + newHash);
+                    return false;
+                }
+
+                if (window.addEventListener) {
+                    window.addEventListener('hashchange', function (e) {
+                        var hash, o, x, cb;
+                        console.log(e.newURL + " is the new URL and " + e.oldURL + " is the old URL, new hash = " + wlocation.hash);
+                        hash = hashExtract(wlocation.hash);
+                        hashChanger(hash);
+                    });
+                }
+
+                //perform our init state, and our init state is dependent on whether hashchange event is supported.
+                //this dependency is enforced through the conditional branch where if the hashchange event isn't support,
+                //our code doesn't execute our init state
+                if (wlocation !== void 0) {
+                    hash = hashExtract(wlocation.hash);
+                    initState = hash;
+                    setTimeout(function(){
+                        initcb(initState, retobj);
+                    });
+                }
+            }
+
+
+            return retobj
+
+        }).call(this, function (initState, self) {
+                //immediate mock
+                var about, junk, about_firstclick, total_change;
+
+
+                about = $('a.about');
+                junk = $('a.junk');
+
+
+                about.click(function (e) {
+                    //e.preventDefault();
+                    self.to("about");
+                });
+
+                junk.click(function (e) {
+                    self.to("junk");
+                    e.preventDefault();
+                });
+
+                console.log("Our initiate State is '" + initState + "'");
+
+                self.on('junk', function () {
+                    console.log("hitting junk");
+                    switch_to($('article#junk'));
+                });
+
+                self.on('about', function () {
+                    console.log("hitting about");
+                    switch_to($('article#about'));
+                });
+
+                if (initState === null) {
+                    initState = "about";
+                    self.to(initState);
+                }else if(initState === "junk") {
+                    //if the hash matches, it won't initiate a change
+                    //when we ask it to change. so we need to force an invocation
+                    self.force_set('junk');
+                } else if (initState === "about") {
+                    self.force_set("about");
+                }
+
+                window.hs = self;
+            });
+
+        breadcrumbs.on('test1', function () {
+            console.log("this is test 1");
+        });
+
+        breadcrumbs.on('test2', function () {
+            console.log("this is test 2");
+        });
+
+
+        var more = $('.more'), mk = makePI(more);
         $.getJSON("/projects.json", function (data) {
             var i, projects;
 
@@ -52,7 +212,19 @@
                     }
                 }
             }
-        })
+        });
 
+        //this function does async loading of the about content
+        (function () {
+            var about_pane = $('article#about');
+            $.get('/stuff/about/about.html', function (data) {
+                var content = [
+                    '<div class="inner">',
+                    data,
+                    '</div>'
+                ].join("");
+                about_pane.append(content);
+            });
+        }).call(this);
     });
 }).call(this);
