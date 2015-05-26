@@ -190,14 +190,6 @@
                 window.hs = self;
             });
 
-        breadcrumbs.on('test1', function () {
-            console.log("this is test 1");
-        });
-
-        breadcrumbs.on('test2', function () {
-            console.log("this is test 2");
-        });
-
 
         var more = $('.more'), mk = makePI(more);
         $.getJSON("/projects.json", function (data) {

@@ -28,14 +28,14 @@
 
         {
             "name": "solitaire-mancala",
-            "dir":"/stuff/Solitaire_Mancala/",
+            "dir":"/stuff/solitaire_mancala/",
             "title": "GAME: Solitaire Mancala"
         },
 
 
         {
             "name": "solitaire-mancala-modal",
-            "dir":"/stuff/Solitaire_Mancala/mock_modal.html",
+            "dir":"/stuff/solitaire_mancala/mock_modal.html",
             "title": "GAME: Solitaire Mancala"
         },
 
