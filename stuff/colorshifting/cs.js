@@ -285,7 +285,7 @@
 
 
             //when we invoke unpause, we are asking unpause to execute
-            //bock when it isn't paused.
+            //block when it isn't paused.
             //so depending on the conditions as to whether we are in a paused state
             //or not, unpause will execute the follwing code whenever it becomes unpaused
             unpause(function () {
