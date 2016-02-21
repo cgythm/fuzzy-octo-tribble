@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en-US" manifest="indexv.appcache" class="offline">
 <head>
     <meta charset="UTF-8">
     <title>JUNK STUFF</title>
@@ -26,15 +26,16 @@
         <header>
             <h2>Just Junk</h2>
         </header>
-        <article>
+        <nav>
             <ul class="navlist">
-                <li><a href="#about" class="about">about</a></li>
-                <li><a href="#junk" class="junk">junk</a></li>
-                <li><a href="https://github.com/cgythm/fuzzy-octo-tribble/">view on github</a></li>
+                <li><a href="#about" class="about navlink">about</a></li>
+                <li><a href="#junk" class="junk navlink">junk</a></li>
+                <li><a href="https://github.com/cgythm/fuzzy-octo-tribble/" class="navlink ghub inactive">view on
+                    github</a></li>
             </ul>
-        </article>
+        </nav>
         <article id="junk" class="sections">
-            <ul>
+            <ul class="junk">
                 <li class="more">&nbsp;</li>
             </ul>
         </article>
@@ -43,23 +44,41 @@
         </article>
     </div>
 </div>
-
 <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
 <script type="text/javascript" src="stuff.js"></script>
-<script type="text/javascript" src="/shared/underscore-min.js"></script>
+<script type="text/javascript" src="/shared/offline.js"></script>
 <script type="text/javascript">
-    WebFontConfig = {
-        google: { families: [ 'Oxygen:400,700:latin', 'Mandali::latin', 'Khula::latin' ] }
-    };
-    (function () {
-        var wf = document.createElement('script');
-        wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
-                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-        wf.type = 'text/javascript';
-        wf.async = 'true';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(wf, s);
-    })();
+    (function(){
+        var a = false;
+        function b(){
+            WebFontConfig = {
+                google: { families: [ 'Oxygen:400,700:latin', 'Mandali::latin', 'Khula::latin' ] }
+            };
+            (function () {
+                var wf = document.createElement('script');
+                wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                        '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+                wf.type = 'text/javascript';
+                wf.async = 'true';
+                var s = document.getElementsByTagName('script')[0];
+                s.parentNode.insertBefore(wf, s);
+            })();
+        }
+        if(window.oxline){
+            //oxline provides a means to listen if we are online, offline, cached or uncached
+            //states. if oxline is included, we execute the code to load google fonts only if we
+            //are online.
+            window.oxline("online", function(){
+                if(!a){
+                    b();
+                    a = true;
+                }
+            });
+        }else{
+            //oxline isn't available, so we just load them fonts up.
+            b();
+        }
+    }).call(this);
 </script>
 
 </body>

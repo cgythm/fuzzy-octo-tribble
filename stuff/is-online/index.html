@@ -1,0 +1,113 @@
+<!doctype html>
+<!--<html lang="en-US" manifest="index.appcache">-->
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>are we online or off?</title>
+    <link rel="stylesheet" type="text/css" href="on-off.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/shared/offline.js"></script>
+    <script type="text/javascript" src="onoff.js"></script>
+</head>
+<body class="Arimo">
+<nav class="nav">
+    <!--
+    division of space between a back <title> and about
+
+    can flexbox do this?
+    -->
+    <div class="left">
+        <div>
+            <div class="txt">
+                <a href="#back" id="lback" class="inactive">back</a>
+            </div>
+        </div>
+    </div>
+    <div class="mid">
+        <div>
+            <div class="txt"><a href="#onoff" id="lonoff" class="inactive">online/offline</a></div>
+        </div>
+    </div>
+    <div class="right">
+        <div>
+            <div class="txt"><a id="labout" href="#about" class="inactive">about</a></div>
+        </div>
+    </div>
+</nav>
+<article>
+    <section class="onoff">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet aperiam at ea eaque eos ex, id natus quibusdam
+            similique vel. Animi consectetur doloribus magnam quae rerum! Facere fuga necessitatibus voluptas?</p>
+
+        <p>Commodi cumque cupiditate debitis dolorem ducimus eaque esse inventore nulla obcaecati unde. A adipisci
+            aliquam aliquid doloribus eos illum incidunt inventore iusto laborum maiores modi molestiae, natus nobis
+            possimus voluptatem.</p>
+
+        <p>Blanditiis cumque cupiditate distinctio esse expedita facilis in itaque modi quae, vero. Blanditiis
+            distinctio doloremque est itaque quas temporibus totam vitae voluptate. Animi esse impedit incidunt placeat
+            qui tenetur voluptatem?</p>
+
+        <p>Amet consequuntur distinctio, earum enim ex facilis in iure iusto maiores molestiae numquam obcaecati quam
+            quasi repudiandae, soluta ullam velit voluptas! Dignissimos illo maiores quam. Adipisci ipsa optio quisquam
+            rem?</p>
+
+        <p>Accusamus atque distinctio ducimus, laudantium mollitia perspiciatis quas quis rem similique. A aliquam aut,
+            delectus dolore doloribus exercitationem illum incidunt iste laborum necessitatibus pariatur quae quibusdam
+            repudiandae sit suscipit veritatis.</p>
+    </section>
+    <section class="about">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias beatae distinctio, dolorem, dolorum enim
+            esse in maiores nesciunt quo ratione sequi ullam veritatis. Illum natus quibusdam suscipit tenetur vel?</p>
+
+        <p>Adipisci aperiam beatae, corporis dignissimos dolor esse est et eveniet exercitationem hic, incidunt
+            inventore ipsum itaque iusto laudantium maiores natus neque nisi, nostrum odio perspiciatis possimus
+            quibusdam tempore temporibus ut.</p>
+
+        <p>Ab accusamus adipisci architecto asperiores corporis cum cumque delectus dicta, ea excepturi exercitationem
+            expedita explicabo incidunt libero magnam minima, nemo perspiciatis, possimus provident quasi rerum sint
+            vel? Quaerat saepe, veritatis.</p>
+
+        <p>Amet inventore itaque modi molestiae nam! Commodi culpa cupiditate dolor esse eveniet facilis illum ipsa
+            iure, labore nulla pariatur perspiciatis praesentium quasi reiciendis sed. Accusantium cupiditate modi
+            necessitatibus numquam qui!</p>
+
+        <p>Adipisci aliquid aspernatur commodi consectetur deleniti dolores eos excepturi facilis id ipsum magnam natus
+            nobis quidem, quod soluta sunt ullam ut voluptatibus. Excepturi nisi, ullam. Cumque dicta necessitatibus
+            quas voluptas.</p>
+    </section>
+</article>
+
+<script type="text/javascript">
+    function on_online() {
+        WebFontConfig = {
+            google: { families: [ 'Noto+Sans::latin', 'Cabin::latin', 'Arimo::latin' ] }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    }
+    if (window.oxline) {
+        oxline.listen('online', function () {
+            on_online();
+        });
+
+        oxline.listen('offline', function () {
+
+        });
+
+        oxline.listen('cached', function () {
+
+        });
+    } else {
+        on_online();
+    }
+</script>
+</body>
+</html>

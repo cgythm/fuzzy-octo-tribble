@@ -149,10 +149,9 @@
 
         fk = function () {
             var args;
-
             args = combineargs(unpause, arguments);
             cb.apply(cb, args);
-        }
+        };
 
         return fk;
 
@@ -272,29 +271,34 @@
 
         var so;
         setTimeout(next(colors, pauseable(function (unpause, v, self) {
-            rollcount += 1;
-            $bg.addClass(v)
-            if (previouscolor) {
-                $bg.removeClass(previouscolor);
-            }
-            previouscolor = v;
-
-            //so = v + ", with roll = " + rollcount;
-            $console.text(v + ", with roll = " + rollcount);
-            //console.log(so+ " with pause state = " + (pause_boss.isHidden()?'paused':'unpaused'));
-
-
             //when we invoke unpause, we are asking unpause to execute
-            //block when it isn't paused.
+            //callback when it isn't paused.
             //so depending on the conditions as to whether we are in a paused state
-            //or not, unpause will execute the follwing code whenever it becomes unpaused
+            //or not, unpause will only then execute the follwing code whenever it becomes unpaused.
+            //this is different than using a simple conditional brancing because once that conditional
+            //branching stuff is evaluated, it doesn't get evaluated again unless we loop it. unpause
+            //here functions differently in that we don't have to know when we get backed to the state of
+            //it being unpaused, only know that when it does, we want that bit of code to be executed.
             unpause(function () {
+                rollcount += 1;
+                $bg.addClass(v)
+                if (previouscolor) {
+                    $bg.removeClass(previouscolor);
+                }
+                previouscolor = v;
+
+                //so = v + ", with roll = " + rollcount;
+                $console.text(v + ", with roll = " + rollcount);
+                //console.log(so+ " with pause state = " + (pause_boss.isHidden()?'paused':'unpaused'));
+
+
                 //self is our continuation
-                //we invoke self whenever timeout calls us back.
-                setTimeout(self, 1000);
+                //we invoke self whenever timeout invokes self.
+                setTimeout(self, 3000);
             });
 
         }, pause_boss.isHidden, pause_boss.onChange)));
+
     }
 
     $(document).ready(function () {

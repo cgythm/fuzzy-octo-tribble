@@ -1,12 +1,12 @@
 (function () {
+
     function makeElm($more, data, url) {
         var nn = $('<li>'), s = new Date(Date.now()) + "", b = s.indexOf('GMT'), d, link;
-        console.log('url ' + url);
         if (data !== null && data !== void 0) {
 
             //make a link if we are provided with a URL
             if (url !== null && url !== void 0) {
-                link = $('<a>');
+                link = $('<a class="proj">');
                 link.attr('href', url);
                 link.text(data);
                 link.appendTo(nn);
@@ -66,7 +66,7 @@
                 }
             }
 
-            function invoke(hash) {
+            function invoke(hash, e) {
                 var o, cb, x;
                 if (hash.length >= 1) {
                     //we have a valid hash, so let's just do our thing
@@ -74,7 +74,7 @@
                         o = lookup[hash];
                         for (x = 0; x < o.length; x++) {
                             cb = o[x];
-                            cb();
+                            cb(e);
                         }
                     }
                 }
@@ -85,7 +85,7 @@
             if ('onhashchange' in window.document.body) {
                 retobj = {
                     to: function (xhash) {
-                        console.log("breadcrumbs:to(" + xhash + ")");
+                        //console.log("breadcrumbs:to(" + xhash + ")");
                         if (wlocation !== void 0) {
                             wlocation.hash = xhash;
                         }
@@ -101,7 +101,6 @@
                     },
 
                     force_set: function(hash){
-                        console.log("breadcrumbs:force_set("+hash+")");
                         wlocation.hash = hash;
                         hashChanger(hash);
                     },
@@ -111,22 +110,25 @@
                 };
 
                 old_hash = null;
-                hashChanger = function(newHash){
+                hashChanger = function(newHash, e){
                     if(old_hash !== newHash){
-                        invoke(newHash);
+                        invoke(newHash, e);
                         old_hash = newHash;
                         return true;
                     }
-                    console.log("hashChanger: old hash matches new, " + newHash);
                     return false;
                 }
 
                 if (window.addEventListener) {
                     window.addEventListener('hashchange', function (e) {
                         var hash, o, x, cb;
-                        console.log(e.newURL + " is the new URL and " + e.oldURL + " is the old URL, new hash = " + wlocation.hash);
+                        //console.log(e.newURL + " is the new URL and " + e.oldURL + " is the old URL, new hash = " + wlocation.hash);
                         hash = hashExtract(wlocation.hash);
-                        hashChanger(hash);
+
+                        hashChanger(hash, e);
+
+                        e.preventDefault();
+                        e.stopPropagation();
                     });
                 }
 
@@ -155,8 +157,8 @@
 
 
                 about.click(function (e) {
-                    //e.preventDefault();
                     self.to("about");
+                    e.preventDefault();
                 });
 
                 junk.click(function (e) {
@@ -164,16 +166,20 @@
                     e.preventDefault();
                 });
 
-                console.log("Our initiate State is '" + initState + "'");
+                //console.log("Our initiate State is '" + initState + "'");
 
-                self.on('junk', function () {
-                    console.log("hitting junk");
+                self.on('junk', function (e) {
+                    about.removeClass('active').addClass('inactive');
+                    junk.removeClass('inactive').addClass('active');
                     switch_to($('article#junk'));
+                    //e.preventDefault();
                 });
 
-                self.on('about', function () {
-                    console.log("hitting about");
+                self.on('about', function (e) {
+                    junk.removeClass('active').addClass('inactive');
+                    about.removeClass('inactive').addClass('active');
                     switch_to($('article#about'));
+                    //e.preventDefault();
                 });
 
                 if (initState === null) {
@@ -218,5 +224,9 @@
                 about_pane.append(content);
             });
         }).call(this);
+
+
+
+
     });
 }).call(this);

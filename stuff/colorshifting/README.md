@@ -1,9 +1,9 @@
 ### Sporadic Color Shifting
 
-Besides employing a really simple technique of using css transistions to change the background color,
-I add some functional flair to it to this little exploration to make it a bit more interesting.
+Besides employing a really simple technique of using css transistions to fade the background colors,
+I add some functional flair to it to this.
 
-This little bit of code was my attempt in working with continuation style passing.
+This little bit of code was my attempt in working with continuation style passing:
 
         setTimeout(next(colors, pauseable(function (unpause, v, self) {
             rollcount += 1;
@@ -19,12 +19,12 @@ This little bit of code was my attempt in working with continuation style passin
 
 
             //when we invoke unpause, we are asking unpause to execute
-            //block when it isn't paused.
+            //something else when it isn't paused.
             //so depending on the conditions as to whether we are in a paused state
-            //or not, unpause will execute the follwing code whenever it becomes unpaused
+            //or not, unpause will only then execute the follwing code whenever it becomes unpaused
             unpause(function () {
                 //self is our continuation
-                //we invoke self whenever timeout calls us back.
+                //we invoke self whenever timeout invokes self.
                 setTimeout(self, 1000);
             });
 

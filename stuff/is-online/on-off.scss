@@ -1,0 +1,132 @@
+html{
+    width: 100%;
+}
+
+html.online{
+
+}
+
+html.offline{
+
+}
+
+html.cached{
+
+}
+
+html.uncached{
+
+}
+
+$ps_beige: #EAEAE0;
+$ps_green: #9FBFB2;
+$ps_green2: #BFE5CC;
+
+$nav_height: 60px;
+$body_bg: $ps_green2;
+$header_bg: $ps_beige;
+$body_text: white;
+$header_text: black;
+
+body{
+
+
+    &.Arimo{
+        font-family: 'Arimo', sans-serif;
+    }
+
+    &.Cabin{
+        font-family: 'Cabin', sans-serif;
+    }
+
+    &.Noto{
+        font-family: 'Noto Sans', sans-serif;
+    }
+
+    background-color: $body_bg;
+    color: mix($body_text, $body_bg, 50%);
+
+    margin-top: $nav_height;
+    font-size: 14pt;
+}
+
+article{
+    section{
+        font-size: 16pt;
+        height: 100vh;
+        > p{
+            display: none;
+        }
+    }
+}
+
+
+nav.nav{
+    background-color: $header_bg;
+    height: $nav_height;
+    color: $header_text;
+
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+
+    display: -webkit-flex;
+    display: flex;
+
+    margin: 0;
+    padding: 0 1em;
+
+    a{
+        color: inherit;
+    }
+
+    > div{
+        //this is needed because for the child
+        //container to have a relative height value,
+        //the parent container needs to have a height since
+        //the child container height (in terms of precentages)
+        //would be a relative amount to the parent's container
+        height: 100%;
+        > div {
+            height: 100%;
+
+            //this second div is needed because the parent div
+            //is a flexbox, so it's flexible whereas the second
+            //div isn't, it's a regular box that can occupy the totality
+            //of the first div and then we can center it
+            position: relative;
+            >div{
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+
+    div.left{
+        flex: 0 1 auto;
+        width: 5em;
+    }
+
+    div.mid{
+        flex: 1;
+        div.txt{
+            left: 0px;
+            right: 0px;
+            text-align: center;
+        }
+    }
+
+    div.right{
+        width: 5em;
+        flex: 0 1 auto;
+
+        div.txt{
+            left: 0px;
+            right: 0px;
+            text-align: right;
+        }
+    }
+}
+

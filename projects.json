@@ -8,6 +8,12 @@
         },
 
         {
+            "name": "is-online",
+            "dir" : "/stuff/is-online",
+            "title": "online or offline"
+        },
+
+        {
             "name": "color-shifting",
             "dir": "/stuff/colorshifting/",
             "title": "Sporadic Color shifting"

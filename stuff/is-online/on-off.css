@@ -1,0 +1,60 @@
+html {
+  width: 100%; }
+
+body {
+  background-color: #bfe5cc;
+  color: #dff2e5;
+  margin-top: 60px;
+  font-size: 14pt; }
+  body.Arimo {
+    font-family: 'Arimo', sans-serif; }
+  body.Cabin {
+    font-family: 'Cabin', sans-serif; }
+  body.Noto {
+    font-family: 'Noto Sans', sans-serif; }
+
+article section {
+  font-size: 16pt;
+  height: 100vh; }
+  article section > p {
+    display: none; }
+
+nav.nav {
+  background-color: #eaeae0;
+  height: 60px;
+  color: black;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  display: -webkit-flex;
+  display: flex;
+  margin: 0;
+  padding: 0 1em; }
+  nav.nav a {
+    color: inherit; }
+  nav.nav > div {
+    height: 100%; }
+    nav.nav > div > div {
+      height: 100%;
+      position: relative; }
+      nav.nav > div > div > div {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%); }
+  nav.nav div.left {
+    flex: 0 1 auto;
+    width: 5em; }
+  nav.nav div.mid {
+    flex: 1; }
+    nav.nav div.mid div.txt {
+      left: 0px;
+      right: 0px;
+      text-align: center; }
+  nav.nav div.right {
+    width: 5em;
+    flex: 0 1 auto; }
+    nav.nav div.right div.txt {
+      left: 0px;
+      right: 0px;
+      text-align: right; }

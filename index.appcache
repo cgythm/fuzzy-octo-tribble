@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# to force an update in what is being cached, if
+# the stuff is already cahced, the contents of this
+# file must change. the easiest way to induce a change is
+# to state a version number and just change that number
+# 1.1.0
+
+CACHE:
+/shared/jquery-1.11.2.min.js
+/stuff/about/about.html
+/projects.json
+/stylesheets/home.css
+/stuff.js
+/shared/offline.js
+
+NETWORK:
+*
+
