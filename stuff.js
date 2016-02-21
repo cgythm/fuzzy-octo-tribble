@@ -157,11 +157,14 @@
 
 
                 about.click(function (e) {
+                    e.preventDefault();
                     self.to("about");
+                    alert("haha");
                     e.preventDefault();
                 });
 
                 junk.click(function (e) {
+                    e.preventDefault();
                     self.to("junk");
                     e.preventDefault();
                 });
