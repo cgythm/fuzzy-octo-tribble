@@ -80,7 +80,6 @@
                 }
             }
 
-
             //listen to a hash change event, plus history change event
             if ('onhashchange' in window.document.body) {
                 retobj = {
@@ -159,7 +158,6 @@
                 about.click(function (e) {
                     e.preventDefault();
                     self.to("about");
-                    alert("haha");
                     e.preventDefault();
                 });
 
@@ -175,14 +173,18 @@
                     about.removeClass('active').addClass('inactive');
                     junk.removeClass('inactive').addClass('active');
                     switch_to($('article#junk'));
-                    //e.preventDefault();
+                    if(e != null){
+                        e.preventDefault();
+                    }
                 });
 
                 self.on('about', function (e) {
                     junk.removeClass('active').addClass('inactive');
                     about.removeClass('inactive').addClass('active');
                     switch_to($('article#about'));
-                    //e.preventDefault();
+                    if(e != null){
+                        e.preventDefault();
+                    }
                 });
 
                 if (initState === null) {
@@ -227,8 +229,6 @@
                 about_pane.append(content);
             });
         }).call(this);
-
-
 
 
     });

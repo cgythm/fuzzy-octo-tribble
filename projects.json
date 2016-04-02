@@ -33,24 +33,21 @@
 
 
         {
-            "name": "solitaire-mancala",
-            "dir":"/stuff/solitaire_mancala/",
-            "title": "GAME: Solitaire Mancala"
-        },
-
-
-        {
             "name": "solitaire-mancala-modal",
             "dir":"/stuff/solitaire_mancala/mock_modal.html",
-            "title": "GAME: Solitaire Mancala"
+            "title": "Solitaire Mancala"
         },
 
         {
             "name": "cache-manifest",
             "dir":"/stuff/cache-manifest/mock_modal.html",
             "title": "cache-manifesting stuff"
+        },
+
+        {
+            "name":"lines",
+            "dir":"/stuff/lines/lines.html",
+            "title": "typography study -- line heights"
         }
-
-
     ]
 }

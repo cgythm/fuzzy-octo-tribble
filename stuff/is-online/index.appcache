@@ -1,11 +1,12 @@
 CACHE MANIFEST
 #for: online or offline
-#1.0
+#1.1
 
 CACHE:
 /shared/jquery-1.11.2.min.js
 /shared/offline.js
+onoff.js
+on-off.css
 
 NETWORK:
 *
-on-off.css

@@ -1,16 +1,14 @@
 @import "_style.scss";
 @import "_lib.scss";
 @import "_type.scss";
-
 html {
     width: 100%;
     height: 100%;
-
     font-size: 16pt;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     //&.wf-oxygen-n4-active.wf-oxygen-n7-active {
-    &.wf-active{
-        @extend %font-mandali;
+    &.wf-active {
+        @extend %font-khula;
     }
     body {
         $bg-color: lighten(black, 12%);
@@ -18,9 +16,7 @@ html {
         $fg-color: desaturate(lighten(invert($bg-color), 10%), 90%);
         background-color: $bg-color;
         color: transparentize(mix($fg-color, $medium-gray, 100%-10%), 0.1);
-
         margin: 0;
-
         height: 100%;
         width: 100%;
     }
@@ -30,7 +26,7 @@ html {
     box-sizing: border-box;
 }
 
-%font-kulha {
+%font-khula {
     font-family: 'Khula', sans-serif;
 }
 
@@ -42,25 +38,26 @@ html {
     font-family: 'Mandali', sans-serif;
 }
 
-
-%clearfix{
-//    visibility: hidden;
-//    display: block;
-//    font-size: 0;
-//    content: " ";
-//    clear: both;
-//    height: 0;
-    &:after{
+%clearfix {
+    //    visibility: hidden;
+    //    display: block;
+    //    font-size: 0;
+    //    content: " ";
+    //    clear: both;
+    //    height: 0;
+    &:after {
         //@extend %clearfix;
         clear: both;
         float: none;
     }
-
-    &:before, &:after{ content: " "; display: table; }
-
+    &:before,
+    &:after {
+        content: " ";
+        display: table;
+    }
 }
 
-nav{
+nav {
     @extend %clearfix;
 }
 
@@ -68,67 +65,109 @@ ul.navlist {
     @extend %navlist;
     width: 100%;
     position: relative;
-
     font-size: 1em;
-
     @extend %clearfix;
-
-    li{
-       // display: inline-block !important;
-
+    li {
+        // display: inline-block !important;
     }
-
     text-align: center;
-
-    li:nth-child(1){
+    li:nth-child(1) {
         //left: 0%;
         float: left;
     }
-
-    li:nth-child(2){
+    li:nth-child(2) {
         //left: 50%;
         //transform: translateX(-50%);
         display: inline-block;
-
     }
-
-    li:nth-child(3){
+    li:nth-child(3) {
         //right: 0%;
         float: right;
     }
-
 }
 
-
-%navlist{
+%navlist {
     list-style-type: none;
     margin: 0;
     width: 100%;
     padding: 0;
-
     li {
         //display: inline;
         list-style-type: none;
     }
 }
 
-%contentlist{
+%contentlist {
     list-style-type: none;
     padding: 0;
     width: 100%;
-    li{
+    li {
         width: 100%;
     }
 }
 
-ul.junk{
+ul.junk {
     @extend %contentlist;
 }
 
-article.sections{
+article.sections {
     display: none;
-    &.active{
+    &.active {
         display: block;
+    }
+}
+
+//top and left has same padding, right doesn't
+@mixin minor-major-padding($major, $minor) {
+    //top, right, bottom, left
+    padding: $major $minor 0em $major;
+}
+
+header {
+    //issue due to container before it.
+    clear: both;
+    h2 {
+        margin: 0.25em 0em 0em 0em;
+        padding-bottom: 1rem;
+    }
+}
+
+a {}
+
+a.proj {
+    &,
+    &:visited {
+        color: inherit;
+        text-decoration: none;
+    }
+}
+
+a.navlink {
+    &,
+    &:visited {
+        color: inherit;
+        text-decoration: none;
+        display: inline-block;
+        line-height: 1; //we do this so the height is only as large as the type
+        letter-spacing: 0.05em;
+    }
+    &:hover,
+    &:active {}
+    &.active {
+        -webkit-filter: none;
+        font-size: 1.17em; //default h3 size;
+        padding-bottom: 2pt;
+        border-bottom: solid 2pt;
+        letter-spacing: 0.08em;
+    }
+    &.inactive {
+        -webkit-filter: blur(1px);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+        opacity: 0.5;
+        font-size: 0.9em;
+    }
+    &.ghub {
+        letter-spacing: normal;
     }
 }
 
@@ -138,107 +177,51 @@ $smaller-than-iphone: make-breakpoint($max:300px);
 $iphone: make-breakpoint($max: 600px);
 $ipad-med: make-breakpoint($min: 601px, $max: 1024px);
 
-@mixin minor-major-padding($major, $minor){
-    padding: $major $minor 0em $major;
-}
 
-header{
-    //issue due to container before it.
-    clear: both;
-    h2{
-        margin: 0.25em 0em 0em 0em;
-        padding-bottom: 1rem;
-    }
-}
-
-a{
-
-}
-
-a.proj{
-    &, &:visited{
-        color: inherit;
-        text-decoration: none;
-    }
-}
-a.navlink{
-
-    &, &:visited{
-        color: inherit;
-        text-decoration: none;
-        display: inline-block;
-        line-height: 1; //we do this so the height is only as large as the type
-        letter-spacing: 0.05em;
-    }
-
-    &:hover, &:active{
-
-    }
-
-    &.active{
-        -webkit-filter: none;
-        font-size: 1.17em; //default h3 size;
-
-        padding-bottom: 2pt;
-        border-bottom: solid 2pt;
-        letter-spacing: 0.08em;
-    }
-
-    &.inactive{
-        -webkit-filter: blur(1px);
-        -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-        opacity: 0.5;
-        font-size: 0.9em;
-    }
-
-    &.ghub{
-       letter-spacing: normal;
-    }
-}
-
-@include for-breakpoint($iphone){
+@include for-breakpoint($iphone) {
     body {
         margin: 0;
         height: 100%;
         width: 100%;
     }
-
+    div.pm{
+        padding-left: 2%;
+        padding-right: 1%;
+    }
     div.container {
         width: 100%;
         height: 100%;
-        @include minor-major-padding(1.0rem, 1.0rem);
-        @include for-breakpoint($smaller-than-iphone){
+        @include minor-major-padding(0.5rem, 0.8rem);
+        padding-top: 0rem;
+        margin-top: 1rem;
+        @include for-breakpoint($smaller-than-iphone) {
             font-size: 0.75em;
         }
-
     }
-
-    article#about{
-        font-size: 0.9em;
-        letter-spacing: 0.005em;
-        line-height: 1.5em;
+    article#about {
+        font-size: 0.75rem;
         padding-bottom: 3em;
-        
-        p{
+        p {
             @include paragraph-widder;
         }
     }
-
-    header{
-        h2{
+    article#junk {
+        font-size: 0.9em;
+    }
+    header {
+        h2 {
             font-size: 10vw;
         }
     }
-
 }
 
-@include for-breakpoint($ipad-med){
+@include for-breakpoint($ipad-med) {
     body {
         margin: 0;
         height: 100%;
         width: 100%;
     }
-    div.container{
+    div.container {
         width: 600px;
         margin: 0 auto;
         height: 100%;

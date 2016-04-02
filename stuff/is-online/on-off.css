@@ -1,28 +1,45 @@
+/* line 1, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
 html {
   width: 100%; }
 
+/* line 27, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
 body {
-  background-color: #bfe5cc;
-  color: #dff2e5;
-  margin-top: 60px;
+  background-color: #BFE5CC;
+  color: #dff2e6;
   font-size: 14pt; }
+  /* line 28, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
   body.Arimo {
     font-family: 'Arimo', sans-serif; }
+  /* line 31, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
   body.Cabin {
     font-family: 'Cabin', sans-serif; }
+  /* line 34, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
   body.Noto {
     font-family: 'Noto Sans', sans-serif; }
 
-article section {
-  font-size: 16pt;
-  height: 100vh; }
-  article section > p {
-    display: none; }
+/* line 43, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+* {
+  box-sizing: border-box; }
 
+/* line 47, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+article {
+  padding-top: 60px; }
+  /* line 49, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+  article section {
+    font-size: 16pt;
+    height: 100vh; }
+    /* line 55, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+    article section.inactive {
+      display: none; }
+    /* line 58, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+    article section.active {
+      display: block; }
+
+/* line 64, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
 nav.nav {
-  background-color: #eaeae0;
+  background-color: #EAEAE0;
   height: 60px;
-  color: black;
+  color: rgba(0, 0, 0, 0.75);
   position: fixed;
   top: 0px;
   left: 0px;
@@ -31,30 +48,90 @@ nav.nav {
   display: flex;
   margin: 0;
   padding: 0 1em; }
+  /* line 76, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
   nav.nav a {
-    color: inherit; }
+    color: inherit;
+    text-decoration: none;
+    padding-bottom: 0.05em;
+    border-bottom: solid 2px;
+    letter-spacing: 0.018em;
+    transition-property: color;
+    transition-duration: 0.5s; }
+    /* line 86, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+    nav.nav a.inactive {
+      color: rgba(140, 132, 125, 0.68); }
+  /* line 92, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
   nav.nav > div {
     height: 100%; }
+    /* line 99, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
     nav.nav > div > div {
       height: 100%;
       position: relative; }
+      /* line 106, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
       nav.nav > div > div > div {
         position: absolute;
         top: 50%;
         transform: translateY(-50%); }
+  /* line 113, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
   nav.nav div.left {
     flex: 0 1 auto;
     width: 5em; }
+  /* line 117, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
   nav.nav div.mid {
     flex: 1; }
+    /* line 119, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
     nav.nav div.mid div.txt {
       left: 0px;
       right: 0px;
       text-align: center; }
+  /* line 125, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
   nav.nav div.right {
     width: 5em;
     flex: 0 1 auto; }
+    /* line 128, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
     nav.nav div.right div.txt {
       left: 0px;
       right: 0px;
       text-align: right; }
+
+/* line 136, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+div.onoff-main {
+  display: block;
+  padding: 3em;
+  width: 100%;
+  height: 100%;
+  /*
+    sass generates wrong css, should append @at-root
+    html.not-cached span.from-server {
+        display: inline;
+    }
+
+    html.cached span.from-cache{
+        display: inline;
+    }*/ }
+  /* line 142, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+  div.onoff-main span.online {
+    display: none; }
+    /* line 145, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+    html.online div.onoff-main span.online {
+      display: inline; }
+  /* line 150, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+  div.onoff-main span.offline {
+    display: none; }
+    /* line 152, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+    html.offline div.onoff-main span.offline {
+      display: inline; }
+  /* line 157, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+  div.onoff-main span.from-cache {
+    display: none; }
+    /* line 159, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+    html.cached div.onoff-main span.from-cache {
+      display: inline; }
+  /* line 163, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+  div.onoff-main span.from-server {
+    display: none; }
+    /* line 165, /Users/mxm/Projects/2k15/fuzzy-octo-tribble/fuzzy-octo-tribble/stuff/is-online/on-off.scss */
+    html.not-cached div.onoff-main span.from-server {
+      display: inline; }
+
+/*# sourceMappingURL=on-off.css.map */
