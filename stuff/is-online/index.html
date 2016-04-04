@@ -5,12 +5,13 @@
     <title>are we online or off?</title>
     <link rel="stylesheet" type="text/css" href="on-off.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="amicached.js"></script>
     <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="/shared/offline.js"></script>
     <script type="text/javascript" src="onoff.js"></script>
 </head>
 <body class="Arimo">
-<nav class="nav">
+<nav class="nav new">
     <!--
     division of space between a back <title> and about
 
@@ -38,7 +39,9 @@
     <section class="onoff">
         <div class="onoff-main">
             <div class="network-status">
+                <p>
                 network status: <span class="online">online</span><span class="offline">offline</span>
+                </p>
             </div>
 
             <div class="cache-status">
@@ -46,7 +49,7 @@
             </div>
         </div>
     </section>
-    <section class="about">
+    <section class="about exp">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad alias beatae distinctio, dolorem, dolorum enim
             esse in maiores nesciunt quo ratione sequi ullam veritatis. Illum natus quibusdam suscipit tenetur vel?</p>
 
@@ -61,6 +64,29 @@
         <p>Amet inventore itaque modi molestiae nam! Commodi culpa cupiditate dolor esse eveniet facilis illum ipsa
             iure, labore nulla pariatur perspiciatis praesentium quasi reiciendis sed. Accusantium cupiditate modi
             necessitatibus numquam qui!</p>
+            <div class="exp-show">
+                <div class="top">
+                            <p>Amet inventore itaque modi molestiae nam! Commodi culpa cupiditate dolor esse eveniet facilis illum ipsa
+            iure, labore nulla pariatur perspiciatis praesentium quasi reiciendis sed. Accusantium cupiditate modi
+            necessitatibus numquam qui!</p>
+                </div>
+                <div class="middle">
+                    <div>
+                        <a href="#">left</a>
+                    </div>
+                    <div>
+                        <a href="#">middle</a>
+                    </div>
+                    <div>
+                        <a href="#">right</a>
+                    </div>
+                </div>
+                <div class="bottom">
+                            <p>Amet inventore itaque modi molestiae nam! Commodi culpa cupiditate dolor esse eveniet facilis illum ipsa
+            iure, labore nulla pariatur perspiciatis praesentium quasi reiciendis sed. Accusantium cupiditate modi
+            necessitatibus numquam qui!</p>
+                </div>
+            </div>
     </section>
 </article>
 
@@ -94,6 +120,11 @@
     } else {
         on_online();
     }
+
+    var t = false, nav = $("nav");
+    window.nav_old = () =>{nav.addClass("old").removeClass("new")}
+    window.nav_new = () =>{nav.addClass("new").removeClass("old")};
+    window.toggle = () => {if(t){nav_new()}else{nav_old()} t = !t;};
 </script>
 </body>
 </html>

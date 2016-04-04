@@ -39,12 +39,6 @@
         },
 
         {
-            "name": "cache-manifest",
-            "dir":"/stuff/cache-manifest/mock_modal.html",
-            "title": "cache-manifesting stuff"
-        },
-
-        {
             "name":"lines",
             "dir":"/stuff/lines/lines.html",
             "title": "typography study -- line heights"

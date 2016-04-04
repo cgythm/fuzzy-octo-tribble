@@ -10,3 +10,6 @@ on-off.css
 
 NETWORK:
 *
+
+FALLBACK:
+amicached.js amicached-yes.js

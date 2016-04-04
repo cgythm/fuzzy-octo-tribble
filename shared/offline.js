@@ -39,7 +39,7 @@
     }
 
     function update(isOnline, fromCache) {
-        fromCache = (typeof fromCache != "boolean") ? false : fromCache;
+        //fromCache = (typeof fromCache != "boolean") ? false : fromCache;
         status = isOnline;
 
         if (isOnline !== null && typeof isOnline == "boolean") {

@@ -23,32 +23,152 @@ $nav_height: 60px;
 $body_bg: $ps_green2;
 $header_bg: $ps_beige;
 $body_text: white;
+//header text color
 $header_text: transparentize(black, 1.0 - 0.75); //black;
+//body text color
+$article_text: mix($body_text, $body_bg, 50%);
+$article_text: mix($article_text, $ps_beige, 75%);
+$article_text: mix($article_text, mix($body_text, $body_bg, 90%), 50%);
+%cabin {
+    font-family: 'Cabin', sans-serif;
+}
+
+%noto {
+    font-family: 'Noto', sans-serif;
+}
+
+&.Arimo {
+    font-family: 'Arimo', sans-serif;
+}
+
+&.Cabin {
+    //font-family: 'Cabin', sans-serif;
+    @extend %cabin;
+}
+
+&.Noto {
+    @extend %noto;
+}
+
 body {
     &.Arimo {
         font-family: 'Arimo', sans-serif;
     }
     &.Cabin {
-        font-family: 'Cabin', sans-serif;
+        //font-family: 'Cabin', sans-serif;
+        @extend %cabin;
     }
     &.Noto {
-        font-family: 'Noto Sans', sans-serif;
+        @extend %noto;
     }
     background-color: $body_bg;
-    color: mix($body_text, $body_bg, 50%);
+    color: $body_text;
     //margin-top: $nav_height;
     font-size: 14pt;
+    margin: 0;
 }
 
 * {
     box-sizing: border-box;
 }
 
+nav.nav {
+    @extend %cabin;
+    background-color: $header_bg;
+    height: $nav_height;
+    color: $header_text;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    margin: 0;
+    padding: 0 1em;
+    a {
+        color: inherit;
+        text-decoration: none;
+        padding-bottom: 0.09em;
+        border-bottom: solid 2px;
+        letter-spacing: 0.018em;
+        transition-property: color;
+        transition-duration: 0.5s;
+
+        &:hover,
+        &.inactive:hover {
+            color: $header_text;
+        }
+        &.inactive {
+            $inactive_color: mix($header_text, #9D6458, 80%);
+            $inactive_color: mix($inactive_color, $header_bg, 60%);
+            color: transparentize($inactive_color, 1 - 0.8);
+        }
+    }
+    & {
+        display: -webkit-flex;
+        display: flex;
+        justify-content: space-between;
+        > div{
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+
+    &.old-nav {
+        display: -webkit-flex;
+        display: flex;
+        > div {
+            //this is needed because for the child
+            //container to have a relative height value,
+            //the parent container needs to have a height since
+            //the child container height (in terms of precentages)
+            //would be a relative amount to the parent's container
+            height: 100%;
+            > div {
+                height: 100%;
+                //this second div is needed because the parent div
+                //is a flexbox, so it's flexible whereas the second
+                //div isn't, it's a regular box that can occupy the totality
+                //of the first div and then we can center it
+                position: relative;
+                >div {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+        }
+        div.left {
+            flex: 0 1 auto;
+            width: 4em;
+        }
+        div.mid {
+            flex: 1;
+            div.txt {
+                left: 0px;
+                right: 0px;
+                text-align: center;
+            }
+        }
+        div.right {
+            width: 5em;
+            flex: 0 1 auto;
+            div.txt {
+                left: 0px;
+                right: 0px;
+                text-align: right;
+            }
+        }
+    }
+}
+
 article {
-    padding-top: $nav_height;
+    height: 100vh;
+    color: $article_text;
     section {
-        font-size: 16pt;
-        height: 100vh;
+        padding-top: $nav_height;
+        height: 100%;
         > p {
             //display: none;
         }
@@ -61,113 +181,120 @@ article {
     }
 }
 
-nav.nav {
-    background-color: $header_bg;
-    height: $nav_height;
-    color: $header_text;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    display: -webkit-flex;
-    display: flex;
-    margin: 0;
-    padding: 0 1em;
-    a {
-        color: inherit;
-        text-decoration: none;
-        padding-bottom: 0.05em;
-        border-bottom: solid 2px;
-        letter-spacing: 0.018em;
-
-        transition-property: color;
-        transition-duration: 0.5s;
-
-        &.inactive {
-            $inactive_color: mix($header_text, #9D6458, 80%);
-            $inactive_color: mix($inactive_color, $header_bg, 60%);
-            color: transparentize($inactive_color, 1 - 0.8);
+section.about {
+    padding-left: 1em;
+    padding-right: 1em;
+    font-size: 14pt;
+    &.exp {
+        > p {
+            display: none;
         }
-    }
-    > div {
-        //this is needed because for the child
-        //container to have a relative height value,
-        //the parent container needs to have a height since
-        //the child container height (in terms of precentages)
-        //would be a relative amount to the parent's container
-        height: 100%;
-        > div {
+        > .exp-show {
             height: 100%;
-            //this second div is needed because the parent div
-            //is a flexbox, so it's flexible whereas the second
-            //div isn't, it's a regular box that can occupy the totality
-            //of the first div and then we can center it
-            position: relative;
-            >div {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
+            width: 100%;
+            .top {
+                width: 100%;
+                height: calc(50% - 30px);
             }
-        }
-    }
-    div.left {
-        flex: 0 1 auto;
-        width: 5em;
-    }
-    div.mid {
-        flex: 1;
-        div.txt {
-            left: 0px;
-            right: 0px;
-            text-align: center;
-        }
-    }
-    div.right {
-        width: 5em;
-        flex: 0 1 auto;
-        div.txt {
-            left: 0px;
-            right: 0px;
-            text-align: right;
+            .middle {
+                width: 100%;
+                height: 60px;
+                display: flex;
+                justify-content: space-between;
+                > div {
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    p {
+                        margin: 0;
+                    }
+                    a {
+                        text-decoration: none;
+                        padding-bottom: 0.5em;
+                        border-bottom: solid 2pt;
+                        transition-property: padding;
+                        transition-duration: 0.5s;
+                        &:hover,
+                        &:active {
+                            padding-bottom: 25vh;
+                        }
+                    }
+                    &:nth-child(1) {
+                        padding-top: 0.5em;
+                    }
+                    &:nth-child(2) {
+                        padding-top: 0.75em;
+                    }
+                    &:nth-child(3) {
+                        padding-top: 1.0em;
+                    }
+                }
+            }
+            .bottom {
+                width: 100%;
+                height: calc(50% - 30px);
+            }
         }
     }
 }
 
-div.onoff-main{
-    display: block;
-    padding: 3em;
-    width: 100%;
-    height: 100%;
-
-    span.online{
-        display: none;
-
-        html.online &{
-            display: inline
-        }
+section.onoff {
+    font-size: 18pt;
+    &.active {
+        display: -webkit-flex;
+        display: flex;
     }
-
-    span.offline{
-        display: none;
-        html.offline &{
-            display: inline;
+    justify-content: center;
+    align-items: center;
+    //i want the contents of this elm to be visually centered within the view
+    //port. adding the top padding to offset the nav bar distorts that effect
+    //so for this section, it makes essence to remove the padding and
+    //since it is centered, visually there will still be space between
+    //the nav-bar and the content.
+    padding-top: 0;
+    @at-root div.onoff-main {
+        //padding: 3em;
+        //width: 100%;
+        //height: 100%;
+        div.network-status {
+            display: block;
+            height: auto;
         }
-    }
-
-    span.from-cache{
-        display: none;
-        html.cached &{
-            display: inline;
+        div.cache-status {
+            // display: none;
+            html.cached & {
+                display: block;
+            }
+            html.not-cached & {
+                display: block;
+            }
         }
-    }
-    span.from-server{
-        display: none;
-        html.not-cached & {
-            display: inline;
+        span.online {
+            display: none;
+            html.online & {
+                display: inline
+            }
         }
-    }
-
-    /*
+        span.offline {
+            display: none;
+            html.offline & {
+                display: inline;
+            }
+        }
+        span.from-cache {
+            display: none;
+            html.cached & {
+                display: inline;
+            }
+        }
+        span.from-server {
+            display: none;
+            html.not-cached & {
+                display: inline;
+            }
+        }
+        /*
     sass generates wrong css, should append @at-root
     html.not-cached span.from-server {
         display: inline;
@@ -176,4 +303,5 @@ div.onoff-main{
     html.cached span.from-cache{
         display: inline;
     }*/
+    }
 }
