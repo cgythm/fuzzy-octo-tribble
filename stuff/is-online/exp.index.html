@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en-US" manifest="index.appcache">
+<head>
+    <meta charset="UTF-8">
+    <title>are we online or off?</title>
+    <link rel="stylesheet" type="text/css" href="exp-on-off.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="amicached.js"></script>
+    <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/shared/offline.js"></script>
+    <script type="text/javascript" src="onoff.js"></script>
+</head>
+<body class="Arimo">
+<nav class="nav">
+    <div class="left">
+        <div>
+            <div class="txt">
+                <a href="#back" id="lback" class="inactive">back</a>
+            </div>
+        </div>
+    </div>
+    <div class="mid">
+        <div>
+            <div class="txt"><a href="#onoff" id="lonoff" class="inactive">online/offline</a></div>
+        </div>
+    </div>
+    <div class="right">
+        <div>
+            <div class="txt"><a id="labout" href="#about" class="inactive">about</a></div>
+        </div>
+    </div>
+</nav>
+<article>
+    <section class="onoff">
+        <div class="onoff-main">
+            <div class="network-status">
+                <p>
+                network status: <span class="online">online</span><span class="offline">offline</span>
+                </p>
+            </div>
+
+            <div class="cache-status">
+                cache status: <span class="from-cache">serving from cache</span> <span class="from-server">serving from network</span>
+            </div>
+        </div>
+    </section>
+    <section class="about">
+           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate explicabo vitae, mollitia repudiandae facere molestias nisi, aut in doloremque necessitatibus itaque fugiat recusandae debitis, minus laborum nostrum beatae dolore temporibus.</p>
+           <p>Quas praesentium neque ratione necessitatibus ipsam architecto ex suscipit quasi reiciendis dignissimos voluptate deleniti debitis officia aliquam, minima quaerat reprehenderit voluptates accusamus, magnam nisi maxime! Consectetur reiciendis corrupti voluptate eaque?</p>
+           <p>Reprehenderit recusandae tempore quae voluptatum eligendi dolor, provident velit sint incidunt maxime commodi obcaecati quidem tenetur porro architecto aut, sequi molestias, maiores ratione? Molestias ipsum temporibus atque necessitatibus, laboriosam harum.</p>
+           <p>Quisquam totam odio illo ullam dolore, eveniet soluta pariatur sit fugiat asperiores molestias incidunt temporibus dolores velit nisi, voluptatem officiis quo non, qui rem praesentium, sunt unde deserunt excepturi. Laborum.</p>
+           <p>Blanditiis veniam itaque, recusandae nulla nostrum sapiente, dolorum quas placeat iste sit! Voluptatem unde nulla nobis amet consectetur, officia fuga enim ad dicta? Autem vitae consequuntur est quae fugit quos!</p>
+            <div class="exp-show">
+                <div class="top">
+                            <p>Amet inventore itaque modi molestiae nam! Commodi culpa cupiditate dolor esse eveniet facilis illum ipsa
+            iure, labore nulla pariatur perspiciatis praesentium quasi reiciendis sed. Accusantium cupiditate modi
+            necessitatibus numquam qui!</p>
+                </div>
+                <div class="middle">
+                    <div>
+                        <a href="#">left</a>
+                    </div>
+                    <div>
+                        <a href="#">middle</a>
+                    </div>
+                    <div>
+                        <a href="#">right</a>
+                    </div>
+                </div>
+                <div class="bottom">
+                            <p>Amet inventore itaque modi molestiae nam! Commodi culpa cupiditate dolor esse eveniet facilis illum ipsa
+            iure, labore nulla pariatur perspiciatis praesentium quasi reiciendis sed. Accusantium cupiditate modi
+            necessitatibus numquam qui!</p>
+                </div>
+            </div>
+    </section>
+</article>
+
+<script type="text/javascript">
+    function on_online() {
+        WebFontConfig = {
+            google: { families: [ 'Noto+Sans::latin', 'Cabin::latin', 'Arimo::latin' ] }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    }
+    if (window.oxline) {
+        oxline.listen('online', function () {
+            on_online();
+        });
+
+        oxline.listen('offline', function () {
+
+        });
+
+        oxline.listen('cached', function () {
+
+        });
+    } else {
+        on_online();
+    }
+
+
+    var t = false, nav = $("nav");
+    window.nav_old = function() {nav.addClass("old").removeClass("new")};
+    window.nav_new = function(){nav.addClass("new").removeClass("old")};
+    window.toggle = function(){if(t){nav_new()}else{nav_old()} t = !t;};
+</script>
+</body>
+</html>
