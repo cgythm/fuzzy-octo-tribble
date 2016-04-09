@@ -9,7 +9,9 @@
     <script src="amicached.js"></script>
     <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="/shared/offline.js"></script>
+    <script src="/shared/marked.min.js"></script>
     <script type="text/javascript" src="onoff.js"></script>
+    <script src="md-helper.js"></script>
 </head>
 
 <body class="Arimo">
@@ -44,38 +46,7 @@
                 </div>
             </div>
         </section>
-        <section class="about markdown">
-            <h1 id="is-online">is-online</h1>
-
-            <p>When you lose connective, it will report that you are offline. If you refresh the page while connectivity is lost, it will report that you are being served from the cache while also being offline. When you regain connectivity, it will report that you are online. But if you refresh while having connectivity, it can’t tell you whether its being served from cache or not. </p>
-
-            <h3 id="other-info">other info:</h3>
-
-            <ol>
-                <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache">Application Cache</a></li>
-                <li><a href="https://developer.mozilla.org/en/docs/Online_and_offline_events">Online/Offline events</a></li>
-            </ol>
-
-            <h4 id="places-of-interest">places of interest:</h4>
-
-            <ul>
-                <li><a href="https://github.com/cgythm/fuzzy-octo-tribble/blob/gh-pages/shared/offline.js">offline.js</a> hooks into Online/Offline events and, depending on an error of retriving the manifest file, it can tell you that it is offline and thus serving from cache. </li>
-                <li><a href="https://github.com/cgythm/fuzzy-octo-tribble/tree/gh-pages/stuff/is-online/amicached.js">amicached.js</a> and <a href="https://github.com/cgythm/fuzzy-octo-tribble/tree/gh-pages/stuff/is-online/amicached-yes.js">amicached-yes.js</a> abuses the fallback mechanism to report network connectivity state, see <a href="https://github.com/cgythm/fuzzy-octo-tribble/blob/gh-pages/stuff/is-online/index.appcache">manifest file</a>. Since the fallback is cached when amicached.js isn’t accessible, the fallback is served. The fallback to amicached.js is amicached-yes.js. </li>
-            </ul>
-            <h2>Est hic necessitatibus</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit sed deleniti repellendus laboriosam ducimus a placeat nisi soluta quidem, nesciunt dolorum sint magni in dolor ut quibusdam tempore quas rerum!</p>
-            <p>Porro, ad quo quod quaerat nobis explicabo, repellendus deleniti, odit corporis esse ipsam facere aut minima nisi aliquam! Ad quibusdam consequuntur consequatur omnis itaque temporibus iste, reprehenderit repellat accusantium hic?</p>
-            <h3>Repudiandae nemo atque excepturi</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Veniam quod, accusantium esse nulla, obcaecati repellendus soluta error. Non doloribus ipsa ullam, omnis dolores, atque obcaecati officiis aspernatur impedit quidem repellat.</p>
-            <p>Sequi ullam voluptatum numquam, eaque obcaecati aut delectus quas tenetur officiis deserunt, blanditiis! Quis porro, iure sed! Officia minus placeat ab amet harum labore quia, adipisci voluptatem delectus velit error.</p>
-            <p>Tempora culpa iure in laborum eligendi repellendus eum ullam unde harum assumenda reiciendis vel ipsam error praesentium quo itaque, sint aspernatur nobis ex quod doloribus illo. Repudiandae nemo atque excepturi.</p>
-            <h4>Omnis rem nobis tenetur:</h4>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus delectus consequatur ab fugit porro quam quae animi rerum, neque inventore, est sed reiciendis eos dignissimos debitis ex vero numquam labore.</p>
-            <p>Omnis rem nobis tenetur, asperiores at sint in voluptatum aperiam, doloremque tempore distinctio atque repudiandae illum laboriosam vel cupiditate quae dignissimos veritatis! Rem architecto fugiat numquam. Tempora voluptatibus, dolor praesentium.</p>
-            <h5>Tempora culpa iure:</h5>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deserunt, ad culpa distinctio velit mollitia, soluta asperiores est minus eaque consequuntur alias sint iste dicta. Veniam dicta doloremque nemo est necessitatibus!</p>
-            <p>Fuga tenetur, voluptas optio facilis atque voluptate dolorum? Sint neque, repellat rem aspernatur sapiente provident nostrum, molestias labore assumenda dignissimos minima impedit obcaecati, voluptatum dolores laborum. Odio repudiandae assumenda dolore.</p>
-            <p>Omnis fuga deserunt optio magni eaque expedita quas saepe consequatur accusantium asperiores illum quos dolore cupiditate voluptates, exercitationem illo, dolorem consectetur fugiat aut. Harum molestias recusandae dignissimos, alias minus iure?</p>
+        <section class="about markdown" data-markdown="./readme.md">            
         </section>
     </article>
 
