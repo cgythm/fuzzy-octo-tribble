@@ -1,5 +1,5 @@
 # is-online
-When you lose connective, it will report that you are offline. If you refresh the page while connectivity is lost, it will report that you are being served from the cache while also being offline. When you regain connectivity, it will report that you are online. But if you refresh while having connectivity, it can't tell you whether its being served from cache or not.  
+When you lose connective, it will report that you are offline. If you refresh the page while connectivity is lost, it will report that you are offline and are being served from the cache. When you regain connectivity, it will report that you are online. But if you refresh while having connectivity, it can't tell you whether its being served from cache or not.  
 
 ### other info:
 1. [Application Cache](https://developer.mozilla.org/en-US/docs/Web/HTML/Using_the_application_cache)
