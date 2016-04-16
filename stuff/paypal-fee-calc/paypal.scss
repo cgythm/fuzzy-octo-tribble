@@ -1,0 +1,244 @@
+*{
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+    body{
+        background-color: black;
+        color: white;
+    }
+
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+
+    &.wf-nunito-n4-active{
+        font-family: 'Nunito', sans-serif;
+    }
+}
+
+article{
+    width: 100%;
+    height: 100vh;
+    div.innards{
+        padding-left: 2em;
+        padding-right: 2em;
+        margin: 0 auto;
+        margin-top: 2em;
+        margin-bottom: 2em;
+        max-width: 500px;
+    }
+}
+
+section.main{
+    input{
+        $old-border-color: blanchedalmond;
+        $border-color: #53FFE3;
+        outline: none;
+        font-family: inherit;
+        html.wf-nunito-n4-active > &{
+            font-family: 'Nunito', sans-serif;
+        }
+
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid $border-color;
+        color: white;
+        font-size: inherit;
+
+
+        &.full-ten{
+            width: 6em;
+            width: 10ch;
+            text-align: center;
+        }
+
+        &.percentage{
+            width: 4.2em;
+            width: 5.4ch;
+            text-align: right;
+        }
+
+
+        &#beforefees{
+
+        }
+
+        &#taxrate{
+
+        }
+
+
+        &#taxes{
+
+        }
+
+        &#paypalfee{
+
+        }
+
+        &#total{
+
+        }
+
+        &#btn{
+
+        }
+    }
+
+    input[type=number]{
+        &::-webkit-inner-spin-button, &::-webkit-outer-spin-button{
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        -moz-appearance:textfield;
+    }
+
+}
+
+@mixin layout_lh($base_height){
+
+    body{
+        font-size: $base_height;
+    }
+
+    h2{
+        line-height: 1.5em;
+        margin: 1em 0 1em 0;
+    }
+
+    div.in-col, div.btn-c{
+        line-height: 1.5em;
+        min-height: 1.5em;      //our 'line height
+        $base-em: 0.75em;
+        $top-percentage: 0.35;
+        $top-padding: $base-em * $top-percentage;
+        $topbot-split: $base-em - $top-padding;
+        padding-top: $top-padding;
+        padding-bottom: $topbot-split;
+    }
+
+}
+
+
+@function mb($base, $margin){
+    @return #{$base + ($margin * 2)}px
+}
+
+
+html{
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body{
+    margin: 0;
+}
+
+
+html.spaced section.main{
+    div.in-col {
+        &:after{
+            clear: both;
+        }
+
+        &:after, &:before{
+            content: " "; /* 1 */
+            display: table; /* 2 */
+        }
+        > span:nth-child(2){
+            float: right;
+        }
+    }
+}
+
+html.centered section.main{
+    div.in-col{
+        position: relative;
+        > span:first-child{
+            position: absolute;
+        }
+
+        > span:last-child{
+            position: absolute;
+            right: 0px;
+        }
+    }
+}
+
+div.btn-c{
+    //btn-c => button container. this selector styles the container element which has as its children the button.
+    //the purpose of this style is to make the button occupy the full line
+    text-align: center;
+    width: 100%;
+}
+
+
+//this typographic styling is common for both the  width <= 373, and 374 <= w <= 400
+//cases because the header rests on a line with no other element and as it already eist, it doesn't
+//overflow
+h2{
+    letter-spacing: 0.052em;
+}
+
+
+
+
+$blue: #AEC6CF;
+$purple: #B39EB5;
+$pink: #DEA5A4;
+$orange: #FFB347;
+$salmon: #fa8072;
+
+$vp_small: 319px;
+$vp_medium: $vp_small + 10;
+$vp_mediumPlus: $vp_medium + 10;
+$vp_large: $vp_mediumPlus + 10;
+
+
+@media screen and (max-width: $vp_small){
+    html{
+        font-size: 14pt;
+    }
+
+    article{
+        font-size: calc(10vw * 0.5);
+
+        div.innards{
+            padding-left: 6%;
+            padding-right: 6%;
+            width: 100%;
+
+            //font-size: 0.75em;
+
+            /*
+            10vw, at max ub = 10% of 300px.
+
+            reasoning: vw is a relative unit to viewport width, and calc operates on the calculated value. so 10vw is dependent on on viewport width. At 300p, 10vw = 30px. 30px * 0.5 = 15px
+
+            */
+            //font-size: calc(10vw * 0.5);
+
+            @at-root{
+
+                div.btn-c{
+                    //font-size: 0.75em;
+                    //font-size: calc(10vw * 0.5);
+                }
+
+                div.in-col, div.btn-c{
+                    height: 2.12em;
+                    min-height: 2.12em;
+                    padding-top: 0.5em;
+                    padding-bottom: 0.5em;
+                }
+            }
+        }
+    }
+
+    .title{
+        font-size: 0.85rem;
+        font-size: calc(10vw * 0.70);
+    }
+}

@@ -39,6 +39,12 @@
         },
 
         {
+            "name": "paypal-fee-calc",
+            "dir":"/stuff/paypal-fee-calc/",
+            "title": "PayPal Fee Calcuator (in backbone)"
+        },
+
+        {
             "name":"lines",
             "dir":"/stuff/lines/lines.html",
             "title": "typography study -- line heights"

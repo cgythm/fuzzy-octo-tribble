@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="bb">
+
+<head>
+    <title>PayPal Fee Calculator</title>
+    <link rel="stylesheet" type="text/css" href="paypal.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1">
+</head>
+
+<body>
+    <article>
+        <div class="innards">
+            <div class="m">
+                <nav>
+                    <h2 class="title">paypal fee calculator</h2>
+                </nav>
+                <section class="main">
+                    <div class="in-col">
+                        <span>Amount before fees: </span>
+                        <span id="f-beforefees">
+                <span>$</span>
+                        <input type="number" maxlength="10" class="full-ten" id="beforefees" value="0.00" tabindex="1" />
+                        </span>
+                    </div>
+                    <div class="in-col">
+                        <span>Tax rate: </span>
+                        <span id="f-taxerate">
+                <input type="number" maxlength="5" min="0" max="100" class="percentage" id="taxrate" value="0.00"
+                       tabindex="2"/>
+                <span>%</span>
+                        </span>
+                    </div>
+                    <div class="in-col">
+                        <span>Tax: </span>
+                        <span id="f-taxes">
+                <span>$</span>
+                        <input type="number" maxlength="10" class="full-ten no-write" id="taxes" class="full-ten" value="0.00" />
+                        </span>
+                    </div>
+                    <div class="in-col">
+                        <span>Paypal Fee:</span>
+                        <span id="f-paypalfee">
+                <span>$</span>
+                        <input type="number" class="full-ten no-write" value="0.00" id="paypalfee" maxlength="10" />
+                        </span>
+                    </div>
+                    <div class="in-col">
+                        <span>Total: </span>
+                        <span id="f-total">
+                <span>$</span>
+                        <input type="number" class="full-ten" maxlength="10" id="total" value="0.00" tabindex="3" />
+                        </span>
+                    </div>
+                    <div class="btn-c">
+                        <span><input type="button" value="clear" id="btn" tabindex="4"/></span>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </article>
+    <!--z<script type="text/javascript" src="/butt-slapper.js"></script>-->
+    <script type="text/javascript" src="/shared/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="/shared/underscore-min.js"></script>
+    <script type="text/javascript" src="/shared/backbone-min.js"></script>
+    <script type="text/javascript" src="paypalcalc.js"></script>
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: {
+                families: ['Nunito::latin']
+            }
+        };
+        (function () {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })();
+    </script>
+
+    <script type="text/javascript" src="/shared/ab.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            var test_d = ab.elmBinder($('html'), ab.styleToggler('spaced', ['spaced', 'centered', ''], 250));
+
+            $('body').keypress(function (e) {
+                if (e.keyCode == 32) {
+                    test_d();
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            });
+
+            window.alter = test_d;
+
+
+            window.gen = function (times, base, delta, factor) {
+                return _.times(10, function (i) {
+                    var a = base - (i * delta);
+                    return a * factor
+                })
+            };
+
+            window.dif = function (v, i) {
+                return v[i] - v[i + 1];
+            };
+        });
+    </script>
+    <script type="text/template" id='bts-template'>
+        <div class="buttsbar">
+            <!-- the parent container fills the viewport width size.
+        the child container, depending on viewport, occupies some portion of it
+        -->
+            <div>
+                <span class="id"><%=ip%></span>
+                <span class="ua"><%=ua%></span>
+            </div>
+        </div>
+    </script>
+</body>
+
+</html>

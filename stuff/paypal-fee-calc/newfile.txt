@@ -1,0 +1,9 @@
+What is black magic? I don't know how to deal with this black magic stuff, it's wicked
+scary but I can deal with it. It's pretty cool that I typed set wm=45 in command mode
+<esc> mode and now there is a warping margin of 45 characters. this sort of black
+magic basically inserts, for me,  a new line character every 45 characters, creating
+line breaks happen before 45 characters appear without me having to press enter. this
+is wickedly black magic.
+
+okay, some sample code
+void pump(list_l *pump_src, black ){
